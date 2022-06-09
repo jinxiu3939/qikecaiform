@@ -1,0 +1,17 @@
+{
+    "name": "qikecai/sffrender",
+    "description": "render content form seven food form",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Qikecai\\Sffrender\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "hanscai",
+            "email": "jinxiu3939@sina.com"
+        }
+    ],
+    "require": {}
+}
