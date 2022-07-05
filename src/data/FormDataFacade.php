@@ -41,7 +41,7 @@ class FormDataFacade
     public static function getInterfaceOption() {
         $return = [];
         foreach (self::COMPONENTS as $component) {
-            $interface_name = substr($component, strrpos($component, DIRECTORY_SEPARATOR) + 1, -9);
+            $interface_name = substr($component, strrpos($component, "\\") + 1, -9);
             $config = new OptionBean(['text' => $interface_name, 'value' => $interface_name]);
             array_push($return, $config);
         }

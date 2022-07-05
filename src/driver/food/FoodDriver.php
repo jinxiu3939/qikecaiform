@@ -31,7 +31,7 @@ use Qikecai\Sffrender\driver\food\config\FoodConfig;
 
 class FoodDriver extends BaseDriver
 {
-    const DEFAULT_COLUMN = [3, 9]; // 表单默认列宽比
+    const DEFAULT_COLUMN = [3, 9]; // 内容列标签和元素宽度比
 
     /* 组件列表，key为组件类型，必须和配置文件中的types保持一致 */
     protected $components = [
@@ -117,7 +117,7 @@ class FoodDriver extends BaseDriver
         $models = [];
         foreach ($group_field as $group) {
             $model = [
-                'column' => isset($group['column']) && $group['column'] ? $group['column'] : self::DEFAULT_COLUMN, // label和input列宽比
+                'column' => isset($group['column']) ? $group['column'] : self::DEFAULT_COLUMN, // label和input列宽比
                 'title' => isset($group['title']) ? $group['title'] : '', // 分组标题
                 'items' => [] // 字段
             ];
