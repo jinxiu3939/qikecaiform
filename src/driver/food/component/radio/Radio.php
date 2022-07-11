@@ -10,6 +10,7 @@ use Qikecai\Sffrender\driver\food\component\Component;
 class Radio extends Component
 {
     protected $attributeNames = [
+        'all', // 是否显示全部
         'width', // 选项宽度
     ];
 
