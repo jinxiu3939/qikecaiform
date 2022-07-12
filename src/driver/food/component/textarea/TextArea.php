@@ -12,4 +12,13 @@ class TextArea extends Component
     protected $attributeNames = [
         'rows', // 高度
     ];
+
+    /**
+     * 转换换行符
+     * @param $value string 值
+     * @return string
+     */
+    protected function transformValueToText($value) {
+        return str_replace(["\r\n", "\n",], "<br/>", $value);
+    }
 }
