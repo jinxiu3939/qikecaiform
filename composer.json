@@ -13,5 +13,6 @@
             "email": "jinxiu3939@sina.com"
         }
     ],
-    "require": {}
+    "require": {},
+    "license": "MIT"
 }
