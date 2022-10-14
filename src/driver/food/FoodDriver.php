@@ -119,6 +119,8 @@ class FoodDriver extends BaseDriver
             $model = [
                 'column' => isset($group['column']) ? $group['column'] : self::DEFAULT_COLUMN, // label和input列宽比
                 'title' => isset($group['title']) ? $group['title'] : '', // 分组标题
+                'size' => isset($group['size']) ? $group['size'] : 'large', // 组件宽度
+                'hide' => isset($group['hide']) ? $group['hide'] : false, // 是否隐藏组件体
                 'items' => [] // 字段
             ];
             $items = [];
