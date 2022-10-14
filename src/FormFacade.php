@@ -105,4 +105,13 @@ class FormFacade
         $return = $form_factory->view($form, $field, $data);
         return $return;
     }
+
+    /**
+     * 获取组件尺寸
+     */
+    public static function getSize() {
+        $form_factory = FormFactory::instance();
+        $return = $form_factory->getSizes();
+        return $return;
+    }
 }

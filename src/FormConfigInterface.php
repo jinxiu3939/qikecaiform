@@ -37,4 +37,10 @@ interface FormConfigInterface
      * @return array
      */
     public function getAssociateSearchConfig();
+
+    /**
+     * 获取尺寸配置
+     * @return array
+     */
+    public function getSizes();
 }

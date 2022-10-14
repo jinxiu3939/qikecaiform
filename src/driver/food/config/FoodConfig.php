@@ -8,18 +8,19 @@ namespace Qikecai\Sffrender\driver\food\config;
 class FoodConfig {
     // 布局方式
     const layouts = [
-    'ul',
-    'tab',
-    'step'
+        'ul',
+        'tab',
+        'step',
+        'inline'
     ];
 
     // 验证器
     const validators = [
-    'chineseWord',
-    'email',
-    'englishWord',
-    'letterName',
-    'url'
+        'chineseWord',
+        'email',
+        'englishWord',
+        'letterName',
+        'url'
     ];
 
     // 类型 => 子类型（客户端工厂方法名称）
@@ -74,5 +75,13 @@ class FoodConfig {
         'mode',
         'size',
         'endpoint',
+    ];
+
+    // 组件尺寸
+    const sizes = [
+        'large',
+        'medium',
+        'small',
+        'tiny'
     ];
 }

@@ -176,4 +176,12 @@ class FoodDriver extends BaseDriver
         $content['segments'] = $segments;
         return $content;
     }
+
+    /**
+     * 获取组件尺寸
+     * @return array
+     */
+    public function getSizes() {
+        return FoodConfig::sizes;
+    }
 }
