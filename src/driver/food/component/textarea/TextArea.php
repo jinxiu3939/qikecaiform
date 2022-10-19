@@ -14,11 +14,11 @@ class TextArea extends Component
     ];
 
     /**
-     * 转换换行符
+     * 转换值为文本
      * @param $value string 值
      * @return string
      */
     protected function transformValueToText($value) {
-        return str_replace(["\r\n", "\n",], "<br/>", $value);
+        return nl2br(strip_tags($value)); // 过滤标签并增加换行符
     }
 }

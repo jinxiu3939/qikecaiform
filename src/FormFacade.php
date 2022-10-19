@@ -84,7 +84,7 @@ class FormFacade
      * 渲染表单
      * @param $form array 表单
      * @param $field array 字段分组
-     * @param $data array 数据按照字段分组
+     * @param $data array 数据，按照字段索引
      * @return array
      */
     public static function renderForm($form, $field, $data) {

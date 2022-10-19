@@ -25,7 +25,7 @@ class Checkbox extends Radio
      */
     protected function transformValueToText($value) {
         $texts = [];
-        if (is_array($value)) { // 多选址
+        if (is_array($value)) { // 多选值
             foreach ($value as $v) {
                 array_push($texts, $this->fetchOptionText($v)); // 从options中获取文本
             }

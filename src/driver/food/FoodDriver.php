@@ -105,7 +105,7 @@ class FoodDriver extends BaseDriver
      * 渲染表单
      * @param $form array 表单信息
      * @param $group_field array 分组的字段
-     * @param array $data
+     * @param $data array 附加数据，按照字段名称索引
      * @return array
      */
     public function render($form, $group_field, $data)

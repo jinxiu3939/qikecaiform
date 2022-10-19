@@ -95,6 +95,7 @@ abstract class BaseComponent implements ComponentConfigInterface, ComponentInter
 
     /**
      * 解析组件数据
+     * 过滤无效数据配置项
      */
     protected function parseData() {
         $return = [];
@@ -117,11 +118,13 @@ abstract class BaseComponent implements ComponentConfigInterface, ComponentInter
 
     /**
      * 解析字段自定义配置
+     * 过滤无效字段配置
      * @return array
      */
     protected function parseFieldConfig() {
         $return = [];
         $field = $this->field;
+
         /* 设置字段配置 */
         if (isset($field['config']) && is_array($field['config'])) {
             foreach ($field['config'] as $name => $value) {
@@ -130,6 +133,7 @@ abstract class BaseComponent implements ComponentConfigInterface, ComponentInter
                 }
             }
         }
+
         return $return;
     }
 
@@ -157,7 +161,15 @@ abstract class BaseComponent implements ComponentConfigInterface, ComponentInter
      * @return string
      */
     protected function transformValueToText($value) {
-        return $value;
+        $text = $value;
+
+        /* 从数据中获取文本 */
+        $data = $this->data;
+        if (isset($data['text']) && $data['text']) {
+            $text = $data['text'];
+        }
+
+        return $text;
     }
 
     /**

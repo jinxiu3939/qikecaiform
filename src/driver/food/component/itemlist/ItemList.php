@@ -16,5 +16,6 @@ class ItemList extends Component
 {
     protected $dataNames = [
         'attributes', // 字段属性配置
+        'size', // 子项目弹框大小
     ];
 }

@@ -30,6 +30,7 @@ abstract class Component extends BaseComponent
             /* 组件类型 */
             $component['type'] = $component['type'][0];
         }
+
         return $component;
     }
 }

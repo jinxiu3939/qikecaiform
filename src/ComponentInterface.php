@@ -8,6 +8,8 @@ namespace Qikecai\Sffrender;
 
 interface ComponentInterface
 {
+    const VIEW_FORMAT_NAME = 'viewTextFormat'; // 预览格式化标识
+
     /**
      * 配置表单组件
      * 组件赋值

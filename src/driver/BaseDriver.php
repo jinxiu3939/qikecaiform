@@ -94,6 +94,7 @@ abstract class BaseDriver implements ComponentConfigInterface, FormRenderInterfa
             }
         }
         $names = array_unique($configs);
+        sort($names);
         foreach ($names as $name) {
             $option = new OptionBean(['text' => $name, 'value' => $name]);
             array_push($return, $option);

@@ -11,7 +11,7 @@ class FoodConfig {
         'ul',
         'tab',
         'step',
-        'inline'
+        'custom'
     ];
 
     // 验证器
