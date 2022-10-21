@@ -14,8 +14,11 @@ use Qikecai\Sffrender\driver\food\component\Component;
 
 class ItemList extends Component
 {
+    protected $attributeNames = [
+        'size', // 子项目弹框大小
+    ]; // 字段配置项名称
+
     protected $dataNames = [
         'attributes', // 字段属性配置
-        'size', // 子项目弹框大小
     ];
 }

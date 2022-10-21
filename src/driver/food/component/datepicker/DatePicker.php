@@ -42,10 +42,12 @@ class DatePicker extends Component
         }
 
         /* 显示值格式化 */
-        if (isset($this->field[ComponentInterface::VIEW_FORMAT_NAME])) {
-            if ($this->field[ComponentInterface::VIEW_FORMAT_NAME] === self::VIEW_TEXT_FORMAT_AGE) { // 年月日转换成年龄
+        $format = isset($this->field['config'][ComponentInterface::VIEW_FORMAT_NAME])
+            ? $this->field['config'][ComponentInterface::VIEW_FORMAT_NAME] : false;
+        if ($format && $bean->text) {
+            if ($format === self::VIEW_TEXT_FORMAT_AGE) { // 年月日转换成年龄
                 $bean->text = $this->formatToAge($bean->text);
-            } elseif ($this->field[ComponentInterface::VIEW_FORMAT_NAME] === self::VIEW_TEXT_FORMAT_HUMANIZE) { // 转换成人性化时间
+            } elseif ($format === self::VIEW_TEXT_FORMAT_HUMANIZE) { // 转换成人性化时间
                 $bean->text = $this->formatToHumanizeText($bean->text);
             }
         }
@@ -53,8 +55,9 @@ class DatePicker extends Component
         return $bean->toArray(false);
     }
 
-    private function formatToAge($birthday) {
-        if ($birthday) {
+    private function formatToAge($date) {
+        if ($date) {
+            $birthday = $date;
             $birthday = substr($birthday, 0, 10);
             list($year, $month, $day) = explode("-", $birthday);
             $year_diff = date("Y") - $year;
@@ -65,13 +68,14 @@ class DatePicker extends Component
             }
             return max(1, $year_diff) . '岁';
         } else {
-            return $birthday;
+            return $date;
         }
     }
 
-    private function formatToHumanizeText($time){
-        $return = $time;
+    private function formatToHumanizeText($date){
+        $return = $date;
 
+        $time = strtotime($date);
         $t = time() - $time;
         $f = array(
             '31536000' => '年',

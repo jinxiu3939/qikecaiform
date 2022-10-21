@@ -110,19 +110,11 @@ class FoodDriver extends BaseDriver
      */
     public function render($form, $group_field, $data)
     {
-        $content = [
-            'layout' => $form && isset($form['layout']) ? $form['layout'] : '', // 布局方式
-            'models' => [], // 分组的字段
-        ];
+        /* 构造表单模型 */
         $models = [];
         foreach ($group_field as $group) {
-            $model = [
-                'column' => isset($group['column']) ? $group['column'] : self::DEFAULT_COLUMN, // label和input列宽比
-                'title' => isset($group['title']) ? $group['title'] : '', // 分组标题
-                'size' => isset($group['size']) ? $group['size'] : 'large', // 组件宽度
-                'hide' => isset($group['hide']) ? $group['hide'] : false, // 是否隐藏组件体
-                'items' => [] // 字段
-            ];
+            $model = $this->transformToSegment($group);
+
             $items = [];
             foreach ($group['fields'] as $field) {
                 $name = $field['name'];
@@ -134,10 +126,14 @@ class FoodDriver extends BaseDriver
                 }
             }
             $model['items'] = $items;
+
             array_push($models, $model);
         }
-        $content['models'] = $models;
-        return $content;
+
+        return [
+            'layout' => $form && isset($form['layout']) ? $form['layout'] : '', // 布局方式
+            'models' => $models, // 表单模型
+        ];
     }
 
     /**
@@ -149,17 +145,10 @@ class FoodDriver extends BaseDriver
      */
     public function view($form, $group_fields, $data)
     {
-        $content = [
-            'layout' => $form && isset($form['layout']) ? $form['layout'] : '', // 布局方式
-            'segments' => [], // 字段分组
-        ];
         $segments = [];
         foreach ($group_fields as $group) {
-            $segment = [
-                'column' => isset($group['column']) && $group['column'] ? $group['column'] : self::DEFAULT_COLUMN, // label和input列宽比
-                'title' => isset($group['title']) ? $group['title'] : '', // 分组标题
-                'fields' => [] // 字段
-            ];
+            $segment = $this->transformToSegment($group);
+
             $items = [];
             foreach ($group['fields'] as $field) {
                 $name = $field['name'];
@@ -171,10 +160,14 @@ class FoodDriver extends BaseDriver
                 }
             }
             $segment['fields'] = $items;
+
             array_push($segments, $segment);
         }
-        $content['segments'] = $segments;
-        return $content;
+
+        return [
+            'layout' => $form && isset($form['layout']) ? $form['layout'] : '', // 布局方式
+            'segments' => $segments, // 字段分组
+        ];
     }
 
     /**
@@ -183,5 +176,14 @@ class FoodDriver extends BaseDriver
      */
     public function getSizes() {
         return FoodConfig::sizes;
+    }
+
+    private function transformToSegment($group) {
+        return [
+            'column' => isset($group['column']) && $group['column'] ? $group['column'] : self::DEFAULT_COLUMN, // label和input列宽比
+            'title' => isset($group['title']) ? $group['title'] : '', // 分组标题
+            'size' => isset($group['size']) ? $group['size'] : 'large', // 组件宽度
+            'hide' => isset($group['hide']) ? $group['hide'] : false, // 是否隐藏组件体
+        ];
     }
 }

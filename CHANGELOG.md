@@ -1,9 +1,16 @@
+### 0.1.4
+
+2022-10-20
+
+- 修复DatePicker组件text格式化错误的问题
+- 优化FoodDriver表单引擎
+- 修复ItemList组件属性配置错误的问题
+
 ### 0.1.3
 
 2022-10-19
 
 - 增加PopupTree组件filter和readonly属性
-
 
 ### 0.1.2
 
