@@ -131,8 +131,10 @@ class FoodDriver extends BaseDriver
         }
 
         return [
+            'height' => $form && isset($form['height']) ? $form['height'] : '', // 高度
             'layout' => $form && isset($form['layout']) ? $form['layout'] : '', // 布局方式
             'models' => $models, // 表单模型
+            'width' => $form && isset($form['width']) ? $form['width'] : '', // 宽度
         ];
     }
 
