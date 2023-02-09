@@ -15,6 +15,5 @@ class FileSearchConfig extends BaseBean
     public $display; // 显示方式
     public $headers; // 请求头
     public $mode; // 检索方式
-    public $queueLimit; // 可选择最大数目
     public $result; // 默认结果集，类型为文件数组，Qikecai\Sffrender\data\file\FileBean[]
 }

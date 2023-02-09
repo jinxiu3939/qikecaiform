@@ -17,5 +17,4 @@ class FileUploadConfig extends BaseBean
     public $maxFileSize; // 文件最大尺寸
     public $method;
     public $url; // 上传地址
-    public $queueLimit; // 最大上传数
 }
