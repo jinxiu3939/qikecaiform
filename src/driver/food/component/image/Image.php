@@ -10,10 +10,11 @@ use Qikecai\Sffrender\driver\food\component\Component;
 class Image extends Component
 {
     protected $attributeNames = [
-        'aspectRatio', // 裁剪比率, {width: number, height: number}
+        'aspectRatioHeight', // 裁剪比率高度
+        'aspectRatioWidth', // 裁剪比率宽度
         'cropperType', // 裁剪格式，'png'|'jpeg'
         'display', // 展示方式，'image' | 'input'
-        'kind', // 上传类别，['ng2-file-upload']
+        'kind', // 上传类别，'ng2-file-upload'
         'multiple', // 是否多图片
         'queueLimit', // 单次操作最大图片数目
         'repeat', // 是否可以选择重复的图片
