@@ -9,6 +9,7 @@ use Qikecai\Sffrender\data\associate\AssociateNameInterface;
 use Qikecai\Sffrender\data\associate\AssociateSearchConfigInterface;
 use Qikecai\Sffrender\data\editor\EditorConfigInterface;
 use Qikecai\Sffrender\data\file\FileCrawlConfigInterface;
+use Qikecai\Sffrender\data\file\FileCropperConfigInterface;
 use Qikecai\Sffrender\data\file\FileSearchConfigInterface;
 use Qikecai\Sffrender\data\file\FileUploadConfigInterface;
 use Qikecai\Sffrender\data\items\ItemAttributeInterface;
@@ -26,6 +27,7 @@ class FormDataFacade
         AssociateSearchConfigInterface::class,
         EditorConfigInterface::class,
         FileCrawlConfigInterface::class,
+        FileCropperConfigInterface::class,
         FileSearchConfigInterface::class,
         FileUploadConfigInterface::class,
         ItemAttributeInterface::class,

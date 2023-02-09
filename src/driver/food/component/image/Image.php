@@ -18,6 +18,7 @@ class Image extends Component
 
     protected $dataNames = [
         'crawlConfig', // 抓取配置，CrawlConfig
+        'cropperConfig', // 裁剪配置
         'list', // 资源列表
         'searchConfig', // 检索配置
         'uploadConfig', // 上传配置
