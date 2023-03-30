@@ -13,4 +13,6 @@ class PopupFormComponentBean extends BaseBean
     public $type; // 组件类型
     public $value; // 组件名称
     public $options; // 选项
+    public $size; // 分页大小
+    public $endpoint; // 检索地址
 }

@@ -13,7 +13,12 @@ class Image extends Component
         'aspectRatioHeight', // 裁剪比率高度
         'aspectRatioWidth', // 裁剪比率宽度
         'cropperType', // 裁剪格式，'png'|'jpeg'
+        'debug', // 是否开启调试模式
         'display', // 展示方式，'image' | 'input'
+        'hideCrawl', // 是否禁用图片抓取组件
+        'hideCropper', // 是否禁用图片裁剪组件
+        'hideSearch', // 是否禁用图片检索组件
+        'hideUpload', // 是否禁用图片上传组件
         'kind', // 上传类别，'ng2-file-upload'
         'multiple', // 是否多图片
         'queueLimit', // 单次操作最大图片数目

@@ -10,7 +10,7 @@ use Qikecai\Sffrender\driver\food\component\Component;
 class UEditor extends Component
 {
     protected $attributeNames = [
-        'kind', // `u-editor`类别，['classic']
+        'kind', // `u-editor`类别，['classic', 'full']
         'wordCount', // 是否开启最多字符验证
         'autoFloatEnabled', // 是否保持toolbar的位置不动
         'zIndex', // 层级
@@ -33,16 +33,19 @@ class UEditor extends Component
         if (isset($component['wordCount']) && $component['wordCount']) { // 开启最多字符验证
             $editor_config['maximumWords'] = $component['max']; // 最大字符
             unset($component['wordCount']); // 销毁配置值
-        } elseif (isset($component['autoFloatEnabled'])) { // 是否保持toolbar的位置不动
+        }
+        if (isset($component['autoFloatEnabled'])) { // 是否保持toolbar的位置不动
             $editor_config['autoFloatEnabled'] = ($component['autoFloatEnabled'] === 'false' || !$component['autoFloatEnabled']) ? false : true;
             unset($component['autoFloatEnabled']); // 销毁配置值
         }
         // 层级
         if (!isset($component['zIndex'])) {
+            // 编辑页面为弹出框，zIndex需要设置较大，否则会被弹出层遮挡；如果不是，则需要配置zIndex为800，否则编辑之后的提示框被编辑器遮挡
             if (isset($component['uEditorContentId']) && $component['uEditorContentId']) { // 编辑
-                // 编辑页面为弹出框，zIndex需要设置较大，否则会被弹出层遮挡；如果不是，则需要配置zIndex为800，否则编辑之后的提示框被编辑器遮挡
                 $editor_config['zIndex'] = 2000;
                 unset($component['uEditorContentId']); // 销毁配置值
+            } elseif (isset($component['value']) && $component['value'] != '') {
+                $editor_config['zIndex'] = 2000;
             } else { // 新增
                 $editor_config['zIndex'] = 800;
             }

@@ -1,20 +1,18 @@
 <?php
 /**
  * 表单驱动基础类
- * User: SZLD-PC-109
- * Date: 2022/2/7
- * Time: 11:46
  */
 
 namespace Qikecai\Sffrender\driver;
 
 use Qikecai\Sffrender\ComponentConfigInterface;
 use Qikecai\Sffrender\data\option\OptionBean;
+use Qikecai\Sffrender\FormComposeInterface;
 use Qikecai\Sffrender\FormConfigInterface;
 use Qikecai\Sffrender\FormRenderInterface;
 use Qikecai\Sffrender\FormViewInterface;
 
-abstract class BaseDriver implements ComponentConfigInterface, FormRenderInterface, FormConfigInterface, FormViewInterface
+abstract class BaseDriver implements ComponentConfigInterface, FormRenderInterface, FormConfigInterface, FormViewInterface, FormComposeInterface
 {
     const ATTRIBUTE_CONFIG_TYPE = 'attribute';
     const DATA_CONFIG_TYPE = 'data';

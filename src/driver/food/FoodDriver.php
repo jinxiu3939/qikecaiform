@@ -131,6 +131,7 @@ class FoodDriver extends BaseDriver
         }
 
         return [
+            'fold' => $form && isset($form['fold']) ? $form['fold'] : false, // 是否折叠表单
             'height' => $form && isset($form['height']) ? $form['height'] : '', // 高度
             'layout' => $form && isset($form['layout']) ? $form['layout'] : '', // 布局方式
             'models' => $models, // 表单模型
@@ -178,6 +179,32 @@ class FoodDriver extends BaseDriver
      */
     public function getSizes() {
         return FoodConfig::sizes;
+    }
+
+    /**
+     * 组合表单
+     * @param $form array 表单，通过FormRenderInterface接口生成
+     * @param $title string 标题
+     * @param $config array 配置，保留字段
+     * @return mixed
+     */
+    public function compose($form, $title, $config = []) {
+        $new_form = ['fold' => false, 'height' => '', 'layout' => '', 'models' => [], 'tree' => [], 'width' => ''];
+        $new_form = array_merge($new_form, $config);
+        $tree = [];
+        foreach ($form as $k => $f) {
+            $tree[] = ['components' => $f['models'], 'title' => isset($title[$k]) ? $title[$k] : $k]; // 构造三级表单
+
+            /* 保留表单有效值 */
+            foreach ($f as $j => $i) {
+                if ($i) {
+                    $new_form[$j] = $i;
+                }
+            }
+        }
+        $new_form['models'] = []; // 清空二级表单
+        $new_form['tree'] = $tree; // 使用三级表单
+        return $new_form;
     }
 
     private function transformToSegment($group) {

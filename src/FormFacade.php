@@ -114,4 +114,15 @@ class FormFacade
         $return = $form_factory->getSizes();
         return $return;
     }
+
+    /**
+     * 组合表单
+     * @param $forms array 表单
+     * @return array
+     */
+    public static function composeForm($forms, $titles, $config = []) {
+        $form_factory = FormFactory::instance();
+        $return = $form_factory->compose($forms, $titles, $config);
+        return $return;
+    }
 }
