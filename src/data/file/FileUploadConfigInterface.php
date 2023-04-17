@@ -1,11 +1,10 @@
 <?php
-/**
- * 文件上传配置接口
- */
 
 namespace Qikecai\Sffrender\data\file;
 
-
+/**
+ * 文件上传配置接口
+ */
 interface FileUploadConfigInterface
 {
     /**
@@ -15,5 +14,5 @@ interface FileUploadConfigInterface
      * @param array $model
      * @return FileUploadConfig
      */
-    public function getFileUploadConfig($field, $value, $model);
+    public function getFileUploadConfig(array $field, ?array $value, ?array $model): FileUploadConfig;
 }

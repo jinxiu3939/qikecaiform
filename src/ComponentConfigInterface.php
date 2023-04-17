@@ -1,22 +1,25 @@
 <?php
-/**
- * 组件配置接口
- */
 
 namespace Qikecai\Sffrender;
 
-
+/**
+ * 组件配置接口
+ *
+ * @author qikecai <xiujixin@163.com>
+ */
 interface ComponentConfigInterface
 {
     /**
-     * 获取组件属性配置项
+     * 获取属性配置项
+     * 
      * @return array
      */
-    public function getAttributeConfigs();
+    public function getAttributeConfigs(): array;
 
     /**
      * 获取数据配置项
+     * 
      * @return array
      */
-    public function getDataConfigs();
+    public function getDataConfigs(): array;
 }

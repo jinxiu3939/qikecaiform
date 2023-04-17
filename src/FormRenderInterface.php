@@ -5,14 +5,17 @@
 
 namespace Qikecai\Sffrender;
 
+use Qikecai\Sffrender\bean\FormSettingBean;
+
 interface FormRenderInterface
 {
     /**
-     * 渲染表单
-     * @param $group_field array 分组之后的字段
-     * @param $data array 数据
-     * @param $form array 表单信息
-     * @return mixed
+     * 表单设置
+     * 
+     * @param array $form 表单
+     * @param array $block 块
+     * @param array $lang 多语言
+     * @return FormSettingBean
      */
-    public function render($form, $group_field, $data);
+    public function setting(array $form, ?array $block, ?array $lang): FormSettingBean;
 }

@@ -31,8 +31,6 @@ use Qikecai\Sffrender\driver\food\config\FoodConfig;
 
 class FoodDriver extends BaseDriver
 {
-    const DEFAULT_COLUMN = [3, 9]; // 内容列标签和元素宽度比
-
     /* 组件列表，key为组件类型，必须和配置文件中的types保持一致 */
     protected $components = [
         'checkbox' => Checkbox::class,
@@ -60,18 +58,20 @@ class FoodDriver extends BaseDriver
 
     /**
      * 获取组件类型
+     * 
      * @return array
      */
-    public function getComponentTypes()
+    public function getComponentTypes(): array
     {
         return FoodConfig::types;
     }
 
     /**
      * 获取验证器
+     * 
      * @return array
      */
-    public function getValidators()
+    public function getValidators(): array
     {
         return FoodConfig::validators;
     }

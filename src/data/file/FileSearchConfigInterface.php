@@ -1,11 +1,10 @@
 <?php
-/**
- * 文件检索配置接口
- */
 
 namespace Qikecai\Sffrender\data\file;
 
-
+/**
+ * 文件检索配置接口
+ */
 interface FileSearchConfigInterface
 {
     /**
@@ -15,5 +14,5 @@ interface FileSearchConfigInterface
      * @param array $model
      * @return FileSearchConfig
      */
-    public function getFileSearchConfig($field, $value, $model);
+    public function getFileSearchConfig(array $field, ?array $value, ?array $model): FileSearchConfig;
 }

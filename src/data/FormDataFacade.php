@@ -38,9 +38,9 @@ class FormDataFacade
     ];
 
     /**
-     * 获取接口选项
+     * 获取数据接口
      */
-    public static function getInterfaceOption() {
+    public static function getDataInterface() {
         $return = [];
         foreach (self::COMPONENTS as $component) {
             $interface_name = substr($component, strrpos($component, "\\") + 1, -9);

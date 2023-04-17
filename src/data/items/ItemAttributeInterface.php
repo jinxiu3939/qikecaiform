@@ -10,10 +10,11 @@ interface ItemAttributeInterface
 {
     /**
      * 获取子项目属性
+     * 
      * @param array $field
      * @param array $value
      * @param array $model
      * @return ItemAttributeBean[]
      */
-    public function getItemAttribute($field, $value, $model);
+    public function getItemAttribute(array $field, ?array $value, ?array $model): array;
 }

@@ -1,19 +1,18 @@
 <?php
-/**
- * 文件检索配置实体
- */
 
 namespace Qikecai\Sffrender\data\file;
 
-
 use Qikecai\Sffrender\bean\BaseBean;
 
+/**
+ * 文件检索配置实体
+ */
 class FileSearchConfig extends BaseBean
 {
-    public $additionalParameter; // 检索条件
-    public $api; // 检索接口
-    public $display; // 显示方式
-    public $headers; // 请求头
-    public $mode; // 检索方式
-    public $result; // 默认结果集，类型为文件数组，Qikecai\Sffrender\data\file\FileBean[]
+    public array $additionalParameter; // 检索条件
+    public string $api; // 检索接口
+    public string $display; // 显示方式
+    public array $headers; // 请求头
+    public string $mode; // 检索方式
+    public array $result; // 默认结果集，类型为文件数组，Qikecai\Sffrender\data\file\FileBean[]
 }

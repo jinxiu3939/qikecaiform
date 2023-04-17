@@ -1,7 +1,4 @@
 <?php
-/**
- * 组件基础类
- */
 
 namespace Qikecai\Sffrender\driver;
 
@@ -12,26 +9,33 @@ use Qikecai\Sffrender\ComponentInterface;
 use Qikecai\Sffrender\data\option\OptionBean;
 use Qikecai\Sffrender\ComponentConfigInterface;
 
+/**
+ * 组件基础类
+ *
+ * @author qikecai <xiujixin@163.com>
+ */
 abstract class BaseComponent implements ComponentConfigInterface, ComponentInterface
 {
-    protected $field = []; // 字段配置
+    protected $attribute = []; // 组件属性
     protected $data = []; // 组件数据
     protected $dataNames = []; // 数据项名称
-    protected $attributeNames = []; // 字段配置项名称
+    protected $attributeNames = []; // 属性配置项名称
 
-    public function __construct($field = [], $data = [])
+    public function __construct($attribute = [], $data = [])
     {
-        $this->prepareConfig($field, $data);
+        $this->prepareConfig($attribute, $data);
     }
 
     /**
      * 初始化配置
-     * @param $field array
-     * @param $data array
+     * 
+     * @param array $attribute
+     * @param array $data
      */
-    private function prepareConfig($field, $data) {
-        if ($field) {
-            $this->field = $field;
+    private function prepareConfig(array $attribute, array $data): void
+    {
+        if ($attribute) {
+            $this->attribute = $attribute;
         }
         if ($data) {
             $this->data = $data;
@@ -43,13 +47,15 @@ abstract class BaseComponent implements ComponentConfigInterface, ComponentInter
      * 辅助客户端表单组件构建表单
      * 赋值顺序依次是：字段基础配置，内容数据配置，字段自定义配置
      * 实现接口`ComponentInterface`
-     * @param $field array 字段信息
-     * @param $data array 数据值
+     * 
+     * @param array $attribute 组件属性
+     * @param array $data 组件数据
      * @return array
      */
-    public function init($field = [], $data = []) {
-        $this->prepareConfig($field, $data);
-        $base = new ComponentFormBean($this->field); // 组件基础属性配置
+    public function init($attribute = [], $data = []): array
+    {
+        $this->prepareConfig($attribute, $data);
+        $base = new ComponentFormBean($this->attribute); // 组件基础属性配置
         $data = $this->parseData(); // 解析组件数据
         $field = $this->parseFieldConfig(); // 解析组件配置
         $component = array_merge($base->toArray(false), $data, $field);
@@ -60,14 +66,16 @@ abstract class BaseComponent implements ComponentConfigInterface, ComponentInter
     /**
      * 预览组件内容
      * 实现接口`ComponentInterface`
+     * 
      * @param $field array 字段信息
      * @param $data array 数据值
      * @return array
      */
-    public function view($field = [], $data = []) {
+    public function view($field = [], $data = []): array
+    {
         $this->prepareConfig($field, $data);
         $data = $this->parseData(); // 解析组件数据
-        $bean = new ComponentViewBean($this->field);
+        $bean = new ComponentViewBean($this->attribute);
         $bean->setProperty($data);
         $bean->text = $this->transformValueToText($bean->value); // 格式化显示文本
         $view = $this->formatViewContent($bean);
@@ -77,18 +85,20 @@ abstract class BaseComponent implements ComponentConfigInterface, ComponentInter
     /**
      * 获取属性配置项
      * 实现接口`ComponentConfigInterface`
+     * 
      * @return array
      */
-    public function getAttributeConfigs()
+    public function getAttributeConfigs(): array
     {
         return $this->attributeNames;
     }
 
     /**
      * 获取数据配置项
+     * 
      * @return array
      */
-    public function getDataConfigs()
+    public function getDataConfigs(): array
     {
         return $this->dataNames;
     }
@@ -97,7 +107,8 @@ abstract class BaseComponent implements ComponentConfigInterface, ComponentInter
      * 解析组件数据
      * 过滤无效数据配置项
      */
-    protected function parseData() {
+    protected function parseData()
+    {
         $return = [];
         $data = $this->data;
 
@@ -119,13 +130,15 @@ abstract class BaseComponent implements ComponentConfigInterface, ComponentInter
     /**
      * 解析字段自定义配置
      * 过滤无效字段配置
+     * 
      * @return array
      */
-    protected function parseFieldConfig() {
+    protected function parseFieldConfig()
+    {
         $return = [];
-        $field = $this->field;
-
+        
         /* 设置字段配置 */
+        $field = $this->attribute;
         if (isset($field['config']) && is_array($field['config'])) {
             foreach ($field['config'] as $name => $value) {
                 if (in_array($name, $this->attributeNames)) {
@@ -142,7 +155,8 @@ abstract class BaseComponent implements ComponentConfigInterface, ComponentInter
      * @param array $component
      * @return array
      */
-    protected function formatFormComponent($component) {
+    protected function formatFormComponent($component)
+    {
         return $component;
     }
 
@@ -151,7 +165,8 @@ abstract class BaseComponent implements ComponentConfigInterface, ComponentInter
      * @param ComponentViewBean $bean
      * @return array
      */
-    protected function formatViewContent(ComponentViewBean $bean) {
+    protected function formatViewContent(ComponentViewBean $bean)
+    {
         return $bean->toArray(false);
     }
 
@@ -160,7 +175,8 @@ abstract class BaseComponent implements ComponentConfigInterface, ComponentInter
      * @param $value mixed 值
      * @return string
      */
-    protected function transformValueToText($value) {
+    protected function transformValueToText($value)
+    {
         $text = $value;
 
         /* 从数据中获取文本 */
@@ -176,8 +192,9 @@ abstract class BaseComponent implements ComponentConfigInterface, ComponentInter
      * 获取组件选项
      * @return array
      */
-    protected function getOptions() {
-        $field = $this->field;
+    protected function getOptions()
+    {
+        $field = $this->attribute;
         $data = $this->data;
         if (is_array($data) && isset($data['options'])) { // 自定义数据options
             $options = $data['options'];
@@ -194,7 +211,8 @@ abstract class BaseComponent implements ComponentConfigInterface, ComponentInter
      * @param $value string 值
      * @return string
      */
-    protected function fetchOptionText($value) {
+    protected function fetchOptionText($value)
+    {
         $text = $value;
         $options = $this->getOptions();
         foreach ($options as $option) {

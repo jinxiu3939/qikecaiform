@@ -1,46 +1,32 @@
 <?php
-/**
- * 表单配置接口
- */
-
 namespace Qikecai\Sffrender;
 
-
+/**
+ * 表单配置接口
+ *
+ * @author qikecai <xiujixin@163.com>
+ */
 interface FormConfigInterface
 {
     /**
-     * 获取组件类型配置
+     * 获取表单设置值
+     * 
+     * @param string $setting_name 属性名称
      * @return array
      */
-    public function getComponentTypes();
+    public function getSettingValues(string $setting_name): array;
 
     /**
-     * 获取验证器配置
+     * 获取组件类型
+     * 
      * @return array
      */
-    public function getValidators();
+    public function getComponentTypes(): array;
 
     /**
-     * 获取布局配置
+     * 获取验证器
+     * 
      * @return array
      */
-    public function getLayouts();
-
-    /**
-     * 获取弹出框组件类型
-     * @return array
-     */
-    public function getPopupTypes();
-
-    /**
-     * 获取关联检索配置
-     * @return array
-     */
-    public function getAssociateSearchConfig();
-
-    /**
-     * 获取尺寸配置
-     * @return array
-     */
-    public function getSizes();
+    public function getValidators(): array;
 }

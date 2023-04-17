@@ -2,7 +2,7 @@
 
 namespace Qikecai\Sffrender\bean;
 
-use ArrayAccess;
+use \ArrayAccess;
 use Qikecai\Sffrender\util\StrHelper;
 
 /**
@@ -19,9 +19,11 @@ abstract class BaseBean implements ArrayAccess
 
     /**
      * 设置属性
-     * @param $data mixed
+     * 
+     * @param mixed $data
      */
-    final public function setProperty($data) {
+    final public function setProperty($data): void
+    {
         $arr_prop = $this->filterParam($data); // 过滤参数
         if ($arr_prop) {
             /* 过滤静态或非公共属性 */
@@ -36,11 +38,13 @@ abstract class BaseBean implements ArrayAccess
 
     /**
      * 转换成数组
+     * 
      * @param bool $snake 数组键是否转下划线
      * @param bool $filter 数组值是否过滤null
      * @return array
      */
-    final public function toArray($snake = true, $filter = false) {
+    final public function toArray(bool $snake = true, bool $filter = false): array
+    {
         $return = [];
         $class = new \ReflectionClass($this);
         foreach ($class->getProperties(\ReflectionProperty::IS_PUBLIC) as $property) {
@@ -60,36 +64,51 @@ abstract class BaseBean implements ArrayAccess
         return $return;
     }
 
-    // ArrayAccess
-    public function offsetSet($name, $value)
+    /**
+     * @param mixed $name
+     * @param mixed $value
+     * @return void
+     */
+    public function offsetSet(mixed $name, mixed $value): void
     {
         $this->setProperty([$name => $value]);
     }
 
-    // ArrayAccess
-    public function offsetExists($name): bool
+    /**
+     * @param mixed $name
+     * @return boolean
+     */
+    public function offsetExists(mixed $name): bool
     {
         return property_exists($this, $name) && !is_null($this->$name);
     }
 
-    // ArrayAccess
-    public function offsetUnset($name)
+    /**
+     * @param mixed $name
+     * @return void
+     */
+    public function offsetUnset(mixed $name): void
     {
         unset($this->$name);
     }
 
-    // ArrayAccess
-    public function offsetGet($name)
+    /**
+     * @param mixed $name
+     * @return mixed
+     */
+    public function offsetGet(mixed $name): mixed
     {
         return $this->$name;
     }
 
     /**
      * 过滤参数
-     * @param $data mixed
+     * 
+     * @param mixed $data
      * @return array|bool
      */
-    private function filterParam($data) {
+    private function filterParam($data)
+    {
         if (is_array($data) && $data) {
             $arr_prop = $this->filterArray($data);
         } elseif ($data instanceof BaseBean) {
@@ -101,11 +120,12 @@ abstract class BaseBean implements ArrayAccess
     }
 
     /**
-     * @param $data array
-     * @param $camel boolean 是否转换为驼峰
+     * @param array $data
+     * @param bool $camel 是否转换为驼峰
      * @return array
      */
-    private function filterArray($data, $camel = true) {
+    private function filterArray(array $data, bool $camel = true): array
+    {
         $arr_prop = [];
         foreach ($data as $key => $value) {
             if ($camel) {
@@ -121,10 +141,11 @@ abstract class BaseBean implements ArrayAccess
     }
 
     /**
-     * @param $value
+     * @param mixed $value
      * @return array
      */
-    private function formatValue($value) {
+    private function formatValue(mixed $value): array
+    {
         if (is_array($value)) {
             $return = [];
             foreach ($value as $key => $item) {

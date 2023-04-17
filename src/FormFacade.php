@@ -1,128 +1,93 @@
 <?php
-/**
- * 表单引擎门面类
- */
 
 namespace Qikecai\Sffrender;
 
+use Qikecai\Sffrender\bean\FormSettingBean;
 use Qikecai\Sffrender\data\FormDataFacade;
 
+/**
+ * 表单引擎门面类
+ *
+ * @author qikecai <xiujixin@163.com>
+ */
 class FormFacade
 {
     /**
      * 获取组件属性配置项
+     * 
+     * @return array
      */
-    public static function getComponentAttributeConfigs() {
-        $form_factory = FormFactory::instance();
-        $return = $form_factory->getAttributeConfigs();
-        return $return;
+    public static function getComponentAttributeConfigs(): array
+    {
+        return FormFactory::instance()->getAttributeConfigs();
     }
 
     /**
      * 获取组件数据配置项
+     * 
+     * @return array
      */
-    public static function getComponentDataConfigs() {
-        $form_factory = FormFactory::instance();
-        $return = $form_factory->getDataConfigs();
-        return $return;
+    public static function getComponentDataConfigs(): array
+    {
+        return FormFactory::instance()->getDataConfigs();
     }
 
     /**
      * 获取组件类型
-     */
-    public static function getComponentType() {
-        $form_factory = FormFactory::instance();
-        $return = $form_factory->getComponentTypes();
-        return $return;
-    }
-
-    /**
-     * 获取数据接口选项
-     */
-    public static function getDataInterfaceOption() {
-        $return = FormDataFacade::getInterfaceOption();
-        return $return;
-    }
-
-    /**
-     * 获取表单布局
-     */
-    public static function getLayout() {
-        $form_factory = FormFactory::instance();
-        $return = $form_factory->getLayouts();
-        return $return;
-    }
-
-    /**
-     * 获取表单验证器
-     */
-    public static function getValidator() {
-        $form_factory = FormFactory::instance();
-        $return = $form_factory->getValidators();
-        return $return;
-    }
-
-    /**
-     * 获取弹出框组件类型
-     */
-    public static function getPopupComponentType() {
-        $form_factory = FormFactory::instance();
-        $return = $form_factory->getPopupTypes();
-        return $return;
-    }
-
-    /**
-     * 获取弹出框组件类型
-     */
-    public static function getPopupSearchConfigs() {
-        $form_factory = FormFactory::instance();
-        $return = $form_factory->getAssociateSearchConfig();
-        return $return;
-    }
-
-    /**
-     * 渲染表单
-     * @param $form array 表单
-     * @param $field array 字段分组
-     * @param $data array 数据，按照字段索引
+     * 
      * @return array
      */
-    public static function renderForm($form, $field, $data) {
-        $form_factory = FormFactory::instance();
-        $return = $form_factory->render($form, $field, $data);
-        return $return;
+    public static function getComponentType(): array
+    {
+        return FormFactory::instance()->getComponentTypes();
+    }
+
+    /**
+     * 获取数据接口
+     * 
+     * @return array
+     */
+    public static function getDataInterface(): array
+    {
+        return FormDataFacade::getDataInterface();
+    }
+
+    /**
+     * 获取表单设置值
+     * 
+     * @param string $setting_name 属性名称
+     * @return array
+     */
+    public static function getSettingValues(string $setting_name): array
+    {
+        return FormFactory::instance()->getSettingValues($setting_name);
+    }
+
+    /**
+     * 渲染表单设置
+     * 
+     * @param array $form 表单
+     * @param array $block 块
+     * @param array $lang 多语言
+     * @return FormSettingBean
+     */
+    public static function renderSetting(array $form, ?array $block, ?array $lang): FormSettingBean
+    {
+        return FormFactory::instance()->setting($form, $block, $lang);
     }
 
     /**
      * 预览表单
-     * @param $form array 表单
-     * @param $field array 字段
-     * @param $data array 数据
+     * 
+     * @param array $form 表单
+     * @param array $field 字段
+     * @param array $data 数据
      * @return array
      */
-    public static function viewForm($form, $field, $data) {
+    public static function viewForm($form, $field, $data): array
+    {
         $form_factory = FormFactory::instance();
         $return = $form_factory->view($form, $field, $data);
-        return $return;
-    }
-
-    /**
-     * 获取组件尺寸
-     */
-    public static function getSize() {
-        $form_factory = FormFactory::instance();
-        $return = $form_factory->getSizes();
-        return $return;
-    }
-
-    /**
-     * 组合表单
-     * @param $forms array 表单
-     * @return array
-     */
-    public static function composeForm($forms, $titles, $config = []) {
-        $form_factory = FormFactory::instance();
-        $return = $form_factory->compose($forms, $titles, $config);
         return $return;
     }
 }
