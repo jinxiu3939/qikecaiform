@@ -9,10 +9,10 @@ interface FileSearchConfigInterface
 {
     /**
      * 获取文件检索配置
-     * @param array $field
-     * @param array $value
-     * @param array $model
+     * @param array $field 字段配置
+     * @param array $value 字段值
+     * @param array $context 表单上下文
      * @return FileSearchConfig
      */
-    public function getFileSearchConfig(array $field, ?array $value, ?array $model): FileSearchConfig;
+    public function getFileSearchConfig(array $field, ?array $value, ?array $context): FileSearchConfig;
 }

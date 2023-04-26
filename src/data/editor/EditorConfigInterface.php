@@ -12,7 +12,7 @@ interface EditorConfigInterface
      * 
      * @param array $field 字段配置
      * @param array $value 字段值
-     * @param array $model 模型所有字段值
+     * @param array $context 表单上下文
      */
-    public function getEditorConfig(array $field, ?array $value, ?array $model);
+    public function getEditorConfig(array $field, ?array $value, ?array $context);
 }

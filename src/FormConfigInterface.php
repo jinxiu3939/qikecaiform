@@ -9,12 +9,46 @@ namespace Qikecai\Sffrender;
 interface FormConfigInterface
 {
     /**
-     * 获取表单设置值
+     * 获取页面设置项目属性
      * 
-     * @param string $setting_name 属性名称
      * @return array
      */
-    public function getSettingValues(string $setting_name): array;
+    public function getPageSettingItem(): array;
+
+    /**
+     * 获取表单设置项目属性
+     * 
+     * @return array
+     */
+    public function getFormSettingItem(): array;
+
+    /**
+     * 获取关联表单设置项目属性
+     * 
+     * @return array
+     */
+    public function getAssociateSettingItem(): array;
+
+    /**
+     * 获取表格类型
+     * 
+     * @return array
+     */
+    public function getTableTypes(): array;
+
+    /**
+     * 获取表格数据源类型
+     * 
+     * @return array
+     */
+    public function getTableSourceTypes(): array;
+
+    /**
+     * 表格列表行自定义操作名称
+     * 
+     * @return array
+     */
+    public function getTableCustomActions(): array;
 
     /**
      * 获取组件类型

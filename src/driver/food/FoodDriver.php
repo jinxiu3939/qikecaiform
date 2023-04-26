@@ -1,10 +1,8 @@
 <?php
-/**
- * 七棵菜表单类
- */
 
 namespace Qikecai\Sffrender\driver\food;
 
+use Qikecai\Sffrender\bean\FormSettingBean;
 use Qikecai\Sffrender\driver\BaseDriver;
 use Qikecai\Sffrender\driver\food\component\checkbox\Checkbox;
 use Qikecai\Sffrender\driver\food\component\checkboxtree\CheckboxTree;
@@ -29,6 +27,9 @@ use Qikecai\Sffrender\driver\food\component\ueditor\UEditor;
 use Qikecai\Sffrender\driver\food\component\video\Video;
 use Qikecai\Sffrender\driver\food\config\FoodConfig;
 
+/**
+ * 七棵菜表单类
+ */
 class FoodDriver extends BaseDriver
 {
     /* 组件列表，key为组件类型，必须和配置文件中的types保持一致 */
@@ -57,6 +58,36 @@ class FoodDriver extends BaseDriver
     ];
 
     /**
+     * 获取表格类型
+     * 
+     * @return array
+     */
+    public function getTableTypes(): array
+    {
+        return FoodConfig::tableTypes;
+    }
+
+    /**
+     * 获取表格数据源类型
+     * 
+     * @return array
+     */
+    public function getTableSourceTypes(): array
+    {
+        return FoodConfig::tableSourceTypes;
+    }
+
+    /**
+     * 表格列表行自定义操作名称
+     * 
+     * @return array
+     */
+    public function getTableCustomActions(): array
+    {
+        return FoodConfig::tableCustomActions;
+    }
+
+    /**
      * 获取组件类型
      * 
      * @return array
@@ -77,42 +108,55 @@ class FoodDriver extends BaseDriver
     }
 
     /**
-     * 获取布局配置
+     * 获取页面设置项目属性
+     * 
      * @return array
      */
-    public function getLayouts() {
-        return FoodConfig::layouts;
+    public function getPageSettingItem(): array
+    {
+        return $this->formatSettingItem(FoodConfig::pageSetting);
     }
 
     /**
-     * 获取弹出框组件类型
+     * 获取表单设置项目属性
+     * 
      * @return array
      */
-    public function getPopupTypes()
+    public function getFormSettingItem(): array
     {
-        return FoodConfig::popupTypes;
+        return $this->formatSettingItem(FoodConfig::setting);
     }
 
     /**
      * 获取关联检索配置
      * @return array
      */
-    public function getAssociateSearchConfig() {
-        return FoodConfig::popupSearch;
+    public function getAssociateSettingItem(): array {
+        return $this->formatSettingItem(FoodConfig::popupSearch);
     }
 
     /**
-     * 渲染表单
-     * @param $form array 表单信息
-     * @param $group_field array 分组的字段
-     * @param $data array 附加数据，按照字段名称索引
+     * 获取弹出框组件类型
      * @return array
      */
-    public function render($form, $group_field, $data)
+    public function getPopupTypes(): array
+    {
+        return FoodConfig::popupTypes;
+    }
+
+    /**
+     * 表单设置
+     * 
+     * @param array $form 表单
+     * @param array $block 块
+     * @param array $lang 多语言
+     * @return FormSettingBean
+     */
+    public function setting(array $form, ?array $block, ?array $lang): FormSettingBean
     {
         /* 构造表单模型 */
         $models = [];
-        foreach ($group_field as $group) {
+        foreach ($block as $group) {
             $model = $this->transformToSegment($group);
 
             $items = [];
@@ -130,13 +174,13 @@ class FoodDriver extends BaseDriver
             array_push($models, $model);
         }
 
-        return [
+        return new FormSettingBean([
             'fold' => $form && isset($form['fold']) ? $form['fold'] : false, // 是否折叠表单
             'height' => $form && isset($form['height']) ? $form['height'] : '', // 高度
             'layout' => $form && isset($form['layout']) ? $form['layout'] : '', // 布局方式
             'models' => $models, // 表单模型
             'width' => $form && isset($form['width']) ? $form['width'] : '', // 宽度
-        ];
+        ]);
     }
 
     /**
@@ -209,7 +253,6 @@ class FoodDriver extends BaseDriver
 
     private function transformToSegment($group) {
         return [
-            'column' => isset($group['column']) && $group['column'] ? $group['column'] : self::DEFAULT_COLUMN, // label和input列宽比
             'title' => isset($group['title']) ? $group['title'] : '', // 分组标题
             'size' => isset($group['size']) ? $group['size'] : 'large', // 组件宽度
             'hide' => isset($group['hide']) ? $group['hide'] : false, // 是否隐藏组件体

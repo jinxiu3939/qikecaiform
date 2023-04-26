@@ -12,8 +12,8 @@ interface TreeInterface
      * 
      * @param array $field 字段配置
      * @param array $value 字段值
-     * @param array $model 模型值
+     * @param array $context 表单上下文
      * @return mixed
      */
-    public function getTree(array$field, ?array $value, ?array $model);
+    public function getTree(array$field, ?array $value, ?array $context);
 }

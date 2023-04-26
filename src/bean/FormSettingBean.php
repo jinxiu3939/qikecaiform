@@ -22,7 +22,7 @@ class FormSettingBean extends BaseBean
     public bool $hideSubmit; // 隐藏提交按钮
     public string $submitText; // 提交按钮文本
     public bool $hideReset; // 隐藏重置按钮
-    public string $resetText; // 提交按钮文本
+    public string $resetText; // 重置按钮文本
     public string $blockId; // 块标识
     public string $blockTitle; // 块标题
     public string $blockLayout; // 块布局方式

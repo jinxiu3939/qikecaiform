@@ -53,14 +53,33 @@ class FormFacade
     }
 
     /**
-     * 获取表单设置值
+     * 获取表单设置键值对
      * 
-     * @param string $setting_name 属性名称
      * @return array
      */
-    public static function getSettingValues(string $setting_name): array
+    public static function getSettingItem(): array
     {
-        return FormFactory::instance()->getSettingValues($setting_name);
+        return FormFactory::instance()->getFormSettingItem(); // 键选项
+    }
+
+    /**
+     * 获取表单页面设置键值对
+     * 
+     * @return array
+     */
+    public static function getPageSettingItem(): array
+    {
+        return FormFactory::instance()->getPageSettingItem(); // 键选项
+    }
+
+    /**
+     * 获取关联表单设置键值对
+     * 
+     * @return array
+     */
+    public static function getAssociateSettingItem(): array
+    {
+        return FormFactory::instance()->getAssociateSettingItem(); // 键选项
     }
 
     /**

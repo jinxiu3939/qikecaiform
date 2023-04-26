@@ -3,7 +3,6 @@
 namespace Qikecai\Sffrender\driver;
 
 use Qikecai\Sffrender\ComponentConfigInterface;
-use Qikecai\Sffrender\data\option\OptionBean;
 use Qikecai\Sffrender\FormConfigInterface;
 use Qikecai\Sffrender\FormRenderInterface;
 use Qikecai\Sffrender\FormViewInterface;
@@ -79,6 +78,26 @@ abstract class BaseDriver implements ComponentConfigInterface, FormRenderInterfa
     }
 
     /**
+     * 格式化配置项键值对
+     * 
+     * @param array $setting 配置项
+     * @return array
+     */
+    protected function formatSettingItem(array $setting): array {
+        $return = [];
+        foreach ($setting as $key => $payload) {
+            if ($payload === 'boolean') {
+                $return[] = ['key' => $key, 'type' => 'boolean-radio'];
+            } elseif (is_array($payload)) {
+                $return[] = ['key' => $key, 'type' => 'drop-down', 'options' => $payload];
+            } else {
+                $return[] = ['key' => $key, 'type' => 'input'];
+            }
+        }
+        return $return;
+    }
+
+    /**
      * @param string $class
      * @return ComponentConfigInterface
      */
@@ -107,8 +126,7 @@ abstract class BaseDriver implements ComponentConfigInterface, FormRenderInterfa
         $names = array_unique($configs);
         sort($names);
         foreach ($names as $name) {
-            $option = new OptionBean(['text' => $name, 'value' => $name]);
-            array_push($return, $option);
+            $return[] = ['key' => $name, 'type' => 'input'];
         }
         return $return;
     }
