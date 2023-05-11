@@ -20,8 +20,8 @@ class FoodConfig {
 
     // 页面设置
     const pageSetting = [
-        'height' => '',
-        'width' => ''
+        'height' => 'number',
+        'width' => 'number'
     ];
 
     // 表单设置
@@ -83,29 +83,8 @@ class FoodConfig {
         'video' => ['video'],
     ];
 
-    // 表格类型
-    const tableTypes = [
-        'table',
-        'tree'
-    ];
-
-    // 表格数据源类型
-    const tableSourceTypes = [
-        'sync',
-        'async'
-    ];
-
-    // 表格列表行自定义操作名称
-    const tableCustomActions = [
-        'edit',
-        'delete',
-        'log',
-        'copy',
-        'view'
-    ];
-
-    // 弹出框检索组件类型：页面检索子类型 => 弹出框检索类型
-    const popupTypes = [
+    // 关联检索组件类型
+    const associateSearchTypes = [
         'boolean-radio',
         'drop-down',
         'drop-down-filter',
@@ -113,18 +92,10 @@ class FoodConfig {
         'number'
     ];
 
-    // 弹出框检索可配置项
-    const popupSearch = [
+    // 关联检索可配置项
+    const associateSearch = [
         'mode' => ['async', 'sync'], // 检索方式
-        'size' => '', // 检索分页大小
+        'size' => 'number', // 检索分页大小
         'endpoint' => '', // 异步检索接口
-    ];
-
-    // 组件尺寸
-    const sizes = [
-        'large',
-        'medium',
-        'small',
-        'tiny'
     ];
 }

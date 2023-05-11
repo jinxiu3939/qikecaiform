@@ -1,0 +1,19 @@
+{
+    "name": "qikecai/sffrender-test",
+    "description": "test qikecai/sffrender",
+    "authors": [
+        {
+            "name": "hanscai",
+            "email": "jinxiu3939@sina.com"
+        }
+    ],
+    "require": {
+        "qikecai/sffrender": "dev-dev1.0.0"
+    },
+    "repositories": {
+        "qikecai": {
+            "type": "path",
+            "url": ".."
+        }
+    }
+}

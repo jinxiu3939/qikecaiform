@@ -10,5 +10,4 @@ use Qikecai\Sffrender\driver\food\component\radio\Radio;
 
 class DropDownBox extends Radio
 {
-
 }

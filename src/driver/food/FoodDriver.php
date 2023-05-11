@@ -58,36 +58,6 @@ class FoodDriver extends BaseDriver
     ];
 
     /**
-     * 获取表格类型
-     * 
-     * @return array
-     */
-    public function getTableTypes(): array
-    {
-        return FoodConfig::tableTypes;
-    }
-
-    /**
-     * 获取表格数据源类型
-     * 
-     * @return array
-     */
-    public function getTableSourceTypes(): array
-    {
-        return FoodConfig::tableSourceTypes;
-    }
-
-    /**
-     * 表格列表行自定义操作名称
-     * 
-     * @return array
-     */
-    public function getTableCustomActions(): array
-    {
-        return FoodConfig::tableCustomActions;
-    }
-
-    /**
      * 获取组件类型
      * 
      * @return array
@@ -128,134 +98,130 @@ class FoodDriver extends BaseDriver
     }
 
     /**
-     * 获取关联检索配置
+     * 获取关联表单设置项目属性
+     * 
      * @return array
      */
     public function getAssociateSettingItem(): array {
-        return $this->formatSettingItem(FoodConfig::popupSearch);
+        return $this->formatSettingItem(FoodConfig::associateSearch);
     }
 
     /**
-     * 获取弹出框组件类型
+     * 获取关联检索组件类型
+     * 
      * @return array
      */
-    public function getPopupTypes(): array
+    public function getAssociateSearchTypes(): array
     {
-        return FoodConfig::popupTypes;
+        return FoodConfig::associateSearchTypes;
     }
 
     /**
      * 表单设置
      * 
      * @param array $form 表单
-     * @param array $block 块
-     * @param array $lang 多语言
+     * @param array $block 块 [id, title, title_i18n]
+     * @param array $lang 多语言 [code, label]
      * @return FormSettingBean
      */
     public function setting(array $form, ?array $block, ?array $lang): FormSettingBean
     {
+        $return = new FormSettingBean($form);        
+
         /* 构造表单模型 */
-        $models = [];
-        foreach ($block as $group) {
-            $model = $this->transformToSegment($group);
-
-            $items = [];
-            foreach ($group['fields'] as $field) {
-                $name = $field['name'];
-                $type = is_array($field['type']) ? $field['type'][0] : $field['type']; // 字段类型
-                $field_data = isset($data[$name]) ? $data[$name] : [];
-                $component = $this->instance($type, $field, $field_data); // 实例化组件类
-                if ($component) {
-                    array_push($items, $component->init()); // 初始化组件
+        if ($lang) { // 多语言
+            $lang_children = []; // 多语言块
+            foreach ($lang as $l) {
+                $lang_block = new FormSettingBean(['block_title' => $l['label'], 'block_id' => 'block_' . $l['code']]);
+                $form_block = []; // 表单块
+                foreach ($block as $b) {
+                    $block_bean = $this->transformToBlock($b);
+                    $block_bean->blockId .= '_' . $l['code']; // 多语言块标识
+                    if (isset($b['title_i18n'][$l])) {
+                        $block_bean->blockTitle = $b['title_i18n'][$l]; // 多语言块标题
+                    }
+                    $form_block[] = $block_bean;
                 }
-            }
-            $model['items'] = $items;
+                $lang_block->children = $form_block; // 表单块作为多语言块的字块
 
-            array_push($models, $model);
+                $lang_children[] = $lang_block;
+            }
+            $return->children = $lang_children;
+        } else if ($block) {
+            $children = [];
+            foreach ($block as $b) {
+                $children[] = $this->transformToBlock($b);
+            }
+            $return->children = $children;
         }
 
-        return new FormSettingBean([
-            'fold' => $form && isset($form['fold']) ? $form['fold'] : false, // 是否折叠表单
-            'height' => $form && isset($form['height']) ? $form['height'] : '', // 高度
-            'layout' => $form && isset($form['layout']) ? $form['layout'] : '', // 布局方式
-            'models' => $models, // 表单模型
-            'width' => $form && isset($form['width']) ? $form['width'] : '', // 宽度
-        ]);
+        return $return;
     }
 
     /**
-     * 预览表单
-     * @param $form array
-     * @param $group_fields array
-     * @param $data array
+     * 渲染表单组件
+     * 
      * @return array
      */
-    public function view($form, $group_fields, $data)
-    {
-        $segments = [];
-        foreach ($group_fields as $group) {
-            $segment = $this->transformToSegment($group);
-
-            $items = [];
-            foreach ($group['fields'] as $field) {
-                $name = $field['name'];
-                $type = is_array($field['type']) ? $field['type'][0] : $field['type']; // 字段类型
-                $field_data = isset($data[$name]) ? $data[$name] : [];
-                $component = $this->instance($type, $field, $field_data); // 实例化组件类
+    public function renderComponents(array $fields, array $data, ?array $lang): array {
+        $items = [];
+        if ($lang) { // 多语言
+            foreach ($lang as $l) {
+                foreach ($fields as $field) {
+                    $component = $this->transformToComponent($field, $data);
+                    if ($component) {
+                        $component['name'] .= '_' . $l['code']; // 多语言字段名称
+                        $component['block'] .= '_' . $l['code']; // 多语言块标识
+                        if (isset($field['title_i18n'][$l])) {
+                            $component['label'] = $field['title_i18n'][$l]; // 多语言字段标题
+                        }
+                        if (isset($field['description_i18n'][$l])) {
+                            $component['help'] = $field['description_i18n'][$l]; // 多语言字段描述
+                        }
+                        $items[] = $component;
+                    }
+                } 
+            }
+        } else {
+            foreach ($fields as $field) {
+                $component = $this->transformToComponent($field, $data);
                 if ($component) {
-                    array_push($items, $component->view()); // 预览组件
+                    $items[] = $component;
                 }
             }
-            $segment['fields'] = $items;
-
-            array_push($segments, $segment);
         }
-
-        return [
-            'layout' => $form && isset($form['layout']) ? $form['layout'] : '', // 布局方式
-            'segments' => $segments, // 字段分组
-        ];
+        return $items;
     }
 
     /**
-     * 获取组件尺寸
-     * @return array
-     */
-    public function getSizes() {
-        return FoodConfig::sizes;
-    }
-
-    /**
-     * 组合表单
-     * @param $form array 表单，通过FormRenderInterface接口生成
-     * @param $title string 标题
-     * @param $config array 配置，保留字段
+     * 字段转换为组件
+     * 
+     * @param array $field
+     * @param mixed $data
      * @return mixed
      */
-    public function compose($form, $title, $config = []) {
-        $new_form = ['fold' => false, 'height' => '', 'layout' => '', 'models' => [], 'tree' => [], 'width' => ''];
-        $new_form = array_merge($new_form, $config);
-        $tree = [];
-        foreach ($form as $k => $f) {
-            $tree[] = ['components' => $f['models'], 'title' => isset($title[$k]) ? $title[$k] : $k]; // 构造三级表单
-
-            /* 保留表单有效值 */
-            foreach ($f as $j => $i) {
-                if ($i) {
-                    $new_form[$j] = $i;
-                }
-            }
-        }
-        $new_form['models'] = []; // 清空二级表单
-        $new_form['tree'] = $tree; // 使用三级表单
-        return $new_form;
+    private function transformToComponent(array $field, $data) {
+        $name = $field['field_name']; // 字段名称
+        $type = is_array($field['type']) ? $field['type'][0] : $field['type']; // 字段类型
+        $field_data = isset($data[$name]) ? $data[$name] : [];
+        $component = $this->instance($type, $field, $field_data); // 实例化组件对象
+        return $component ? $component->init() : false; // 初始化组件
     }
 
-    private function transformToSegment($group) {
-        return [
-            'title' => isset($group['title']) ? $group['title'] : '', // 分组标题
-            'size' => isset($group['size']) ? $group['size'] : 'large', // 组件宽度
-            'hide' => isset($group['hide']) ? $group['hide'] : false, // 是否隐藏组件体
-        ];
+    /**
+     * 字段分组转换为表单块
+     * 
+     * @param array $segment [id,title]
+     * @return FormSettingBean
+     */
+    private function transformToBlock(array $segment) {
+        $block = new FormSettingBean($segment);
+        if (isset($segment['id']) && $segment['id']) {
+            $block->blockId = $segment['id'];
+        }
+        if (isset($segment['title']) && $segment['title']) {
+            $block->blockTitle = $segment['title'];
+        }
+        return $block;
     }
 }

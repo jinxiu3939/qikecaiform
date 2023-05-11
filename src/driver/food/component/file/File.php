@@ -10,8 +10,11 @@ use Qikecai\Sffrender\driver\food\component\Component;
 class File extends Component
 {
     protected $attributeNames = [
-        'accept', // 文件格式，['image/*']
-        'kind', // 文件类型，['image/gif, image/jpeg']
+        'accept', // 文件格式，['image/*', 'image/gif, image/jpeg']
+        'kind', // 文件类型，['xls', 'word', 'txt', 'image', 'video', 'audio', 'pdf', 'json', 'zip']
+    ];
+
+    protected $dataNames = [
         'download', // 文件下载地址
     ];
 

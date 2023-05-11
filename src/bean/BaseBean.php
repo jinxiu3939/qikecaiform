@@ -48,7 +48,7 @@ abstract class BaseBean implements ArrayAccess
         $return = [];
         $class = new \ReflectionClass($this);
         foreach ($class->getProperties(\ReflectionProperty::IS_PUBLIC) as $property) {
-            if (!$property->isStatic()) {
+            if (!$property->isStatic() && $property->isInitialized($this)) {
                 if ($snake) {
                     $key = StrHelper::snake($property->getName()); // 驼峰属性转下划线变量
                 } else {
@@ -142,9 +142,9 @@ abstract class BaseBean implements ArrayAccess
 
     /**
      * @param mixed $value
-     * @return array
+     * @return mixed
      */
-    private function formatValue(mixed $value): array
+    private function formatValue(mixed $value): mixed
     {
         if (is_array($value)) {
             $return = [];

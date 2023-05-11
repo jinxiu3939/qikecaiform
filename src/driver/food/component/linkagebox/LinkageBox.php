@@ -13,6 +13,7 @@ use Qikecai\Sffrender\driver\food\component\Component;
 class LinkageBox extends Component
 {
     protected $attributeNames = [
+        'readonly', // 是否只读，boolean
         'root', // 根选项的父元素值，用于获取根选项
     ];
 

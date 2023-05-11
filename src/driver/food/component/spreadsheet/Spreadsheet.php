@@ -11,7 +11,6 @@ use Qikecai\Sffrender\driver\food\component\Component;
 class Spreadsheet extends Component
 {
     protected $attributeNames = [
-        'kind', // 上传类别，['ng2-file-upload']
         'view', // 是否预览
     ];
 

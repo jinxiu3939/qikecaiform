@@ -13,23 +13,23 @@ use Qikecai\Sffrender\data\FormDataFacade;
 class FormFacade
 {
     /**
-     * 获取组件属性配置项
+     * 获取组件属性设置键值对
      * 
      * @return array
      */
-    public static function getComponentAttributeConfigs(): array
+    public static function getComponentAttributeSettingItem(): array
     {
-        return FormFactory::instance()->getAttributeConfigs();
+        return DriverFactory::instance()->getComponentAttributeSettingItem(); // 键选项
     }
 
     /**
-     * 获取组件数据配置项
+     * 获取组件数据设置
      * 
      * @return array
      */
-    public static function getComponentDataConfigs(): array
+    public static function getComponentDataSetting(): array
     {
-        return FormFactory::instance()->getDataConfigs();
+        return DriverFactory::instance()->getComponentDataSetting(); // 值选项
     }
 
     /**
@@ -37,9 +37,9 @@ class FormFacade
      * 
      * @return array
      */
-    public static function getComponentType(): array
+    public static function getComponentTypes(): array
     {
-        return FormFactory::instance()->getComponentTypes();
+        return DriverFactory::instance()->getComponentTypes(); // 值选项
     }
 
     /**
@@ -59,7 +59,7 @@ class FormFacade
      */
     public static function getSettingItem(): array
     {
-        return FormFactory::instance()->getFormSettingItem(); // 键选项
+        return DriverFactory::instance()->getFormSettingItem(); // 键选项
     }
 
     /**
@@ -69,7 +69,7 @@ class FormFacade
      */
     public static function getPageSettingItem(): array
     {
-        return FormFactory::instance()->getPageSettingItem(); // 键选项
+        return DriverFactory::instance()->getPageSettingItem(); // 键选项
     }
 
     /**
@@ -79,8 +79,18 @@ class FormFacade
      */
     public static function getAssociateSettingItem(): array
     {
-        return FormFactory::instance()->getAssociateSettingItem(); // 键选项
+        return DriverFactory::instance()->getAssociateSettingItem(); // 键选项
     }
+
+    /**
+     * 获取表单验证器
+     * 
+     * @return array
+     */
+    public static function getValidators(): array 
+    {
+        return DriverFactory::instance()->getValidators(); // 值选项
+    }    
 
     /**
      * 渲染表单设置
@@ -90,23 +100,19 @@ class FormFacade
      * @param array $lang 多语言
      * @return FormSettingBean
      */
-    public static function renderSetting(array $form, ?array $block, ?array $lang): FormSettingBean
+    public static function renderSetting(array $form, ?array $block = [], ?array $lang = []): FormSettingBean
     {
-        return FormFactory::instance()->setting($form, $block, $lang);
+        return DriverFactory::instance()->setting($form, $block, $lang);
     }
 
     /**
-     * 预览表单
-     * 
-     * @param array $form 表单
-     * @param array $field 字段
-     * @param array $data 数据
+     * 渲染表单组件
+     * @param array $fields
+     * @param array $data
+     * @param array|null $lang
      * @return array
      */
-    public static function viewForm($form, $field, $data): array
-    {
-        $form_factory = FormFactory::instance();
-        $return = $form_factory->view($form, $field, $data);
-        return $return;
+    public static function renderComponents(array $fields, ?array $data = [], ?array $lang = []): array {
+        return DriverFactory::instance()->renderComponents($fields, $data, $lang);
     }
 }

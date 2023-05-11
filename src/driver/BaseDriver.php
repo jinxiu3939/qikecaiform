@@ -3,16 +3,17 @@
 namespace Qikecai\Sffrender\driver;
 
 use Qikecai\Sffrender\ComponentConfigInterface;
+use Qikecai\Sffrender\data\items\ItemKeyValueBean;
 use Qikecai\Sffrender\FormConfigInterface;
 use Qikecai\Sffrender\FormRenderInterface;
-use Qikecai\Sffrender\FormViewInterface;
+use Qikecai\Sffrender\util\StrHelper;
 
 /**
  * 表单驱动基础类
  *
  * @author qikecai <xiujixin@163.com>
  */
-abstract class BaseDriver implements ComponentConfigInterface, FormRenderInterface, FormConfigInterface, FormViewInterface
+abstract class BaseDriver implements FormConfigInterface, FormRenderInterface
 {
     const ATTRIBUTE_CONFIG_TYPE = 'attribute';
     const DATA_CONFIG_TYPE = 'data';
@@ -20,23 +21,47 @@ abstract class BaseDriver implements ComponentConfigInterface, FormRenderInterfa
     protected $components = []; // 组件列表
 
     /**
-     * 获取组件属性配置项
+     * 获取组件属性设置键值对
      * 
      * @return array
      */
-    public function getAttributeConfigs(): array
+    public function getComponentAttributeSettingItem(): array
     {
-        return $this->getConfigs(self::ATTRIBUTE_CONFIG_TYPE);
+        $return = [];
+
+        /* 获取组件属性 */
+        $configs = [];
+        foreach ($this->components as $component) {
+            $configs = array_merge($configs, $this->getComponentConfig($component)->getAttributeConfigs());
+        }
+        $names = array_unique($configs); // 去重
+        sort($names); // 排序
+        foreach ($names as $name) {
+            $return[] = new ItemKeyValueBean(['key' => $name, 'type' => 'input']); // 构造键值，所有值都为输入框，客户端不支持不同类型的相同键
+        }
+
+        return $return;
     }
 
     /**
-     * 获取组件数据配置项
+     * 获取组件数据设置项目属性
      * 
      * @return array
      */
-    public function getDataConfigs(): array
+    public function getComponentDataSetting(): array
     {
-        return $this->getConfigs(self::DATA_CONFIG_TYPE);
+        $return = [];
+
+        /* 获取组件数据配置项 */
+        $configs = [];
+        foreach ($this->components as $component) {
+            $configs = array_merge($configs, $this->getComponentConfig($component)->getDataConfigs());
+        }
+        
+        $return = array_unique($configs);
+        sort($return);
+
+        return $return;
     }
 
     /**
@@ -55,6 +80,44 @@ abstract class BaseDriver implements ComponentConfigInterface, FormRenderInterfa
      * @return array
      */
     public function getValidators(): array
+    {
+        return [];
+    }
+
+    /**
+     * 获取关联检索组件类型
+     * 
+     * @return array
+     */
+    public function getAssociateSearchTypes(): array
+    {
+        return [];
+    }
+
+    /**
+     * 获取页面设置项目属性
+     * 
+     * @return array
+     */
+    public function getPageSettingItem(): array
+    {
+        return [];
+    }
+
+    /**
+     * 获取关联检索配置
+     * @return array
+     */
+    public function getAssociateSettingItem(): array {
+        return [];
+    }
+
+    /**
+     * 获取表单设置项目属性
+     * 
+     * @return array
+     */
+    public function getFormSettingItem(): array
     {
         return [];
     }
@@ -84,17 +147,7 @@ abstract class BaseDriver implements ComponentConfigInterface, FormRenderInterfa
      * @return array
      */
     protected function formatSettingItem(array $setting): array {
-        $return = [];
-        foreach ($setting as $key => $payload) {
-            if ($payload === 'boolean') {
-                $return[] = ['key' => $key, 'type' => 'boolean-radio'];
-            } elseif (is_array($payload)) {
-                $return[] = ['key' => $key, 'type' => 'drop-down', 'options' => $payload];
-            } else {
-                $return[] = ['key' => $key, 'type' => 'input'];
-            }
-        }
-        return $return;
+        return StrHelper::formatSettingItem($setting);
     }
 
     /**
@@ -104,30 +157,5 @@ abstract class BaseDriver implements ComponentConfigInterface, FormRenderInterfa
     private function getComponentConfig($class): ComponentConfigInterface
     {
         return new $class();
-    }
-
-    /**
-     * 获取配置项
-     * 
-     * @param string $type
-     * @return array
-     */
-    private function getConfigs($type): array
-    {
-        $return = [];
-        $configs = [];
-        foreach ($this->components as $component) {
-            if ($type === self::ATTRIBUTE_CONFIG_TYPE) { // 属性配置
-                $configs = array_merge($configs, $this->getComponentConfig($component)->getAttributeConfigs());
-            } else { // 数据配置
-                $configs = array_merge($configs, $this->getComponentConfig($component)->getDataConfigs());
-            }
-        }
-        $names = array_unique($configs);
-        sort($names);
-        foreach ($names as $name) {
-            $return[] = ['key' => $name, 'type' => 'input'];
-        }
-        return $return;
     }
 }

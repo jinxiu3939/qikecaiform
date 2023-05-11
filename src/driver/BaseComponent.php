@@ -4,7 +4,6 @@ namespace Qikecai\Sffrender\driver;
 
 
 use Qikecai\Sffrender\bean\ComponentFormBean;
-use Qikecai\Sffrender\bean\ComponentViewBean;
 use Qikecai\Sffrender\ComponentInterface;
 use Qikecai\Sffrender\data\option\OptionBean;
 use Qikecai\Sffrender\ComponentConfigInterface;
@@ -20,26 +19,12 @@ abstract class BaseComponent implements ComponentConfigInterface, ComponentInter
     protected $data = []; // 组件数据
     protected $dataNames = []; // 数据项名称
     protected $attributeNames = []; // 属性配置项名称
+    /* 字段映射表，客户端组件属性名称 => 数据库字段表字段名称 */
+    protected $fieldSchema = [];
 
     public function __construct($attribute = [], $data = [])
     {
         $this->prepareConfig($attribute, $data);
-    }
-
-    /**
-     * 初始化配置
-     * 
-     * @param array $attribute
-     * @param array $data
-     */
-    private function prepareConfig(array $attribute, array $data): void
-    {
-        if ($attribute) {
-            $this->attribute = $attribute;
-        }
-        if ($data) {
-            $this->data = $data;
-        }
     }
 
     /**
@@ -52,7 +37,7 @@ abstract class BaseComponent implements ComponentConfigInterface, ComponentInter
      * @param array $data 组件数据
      * @return array
      */
-    public function init($attribute = [], $data = []): array
+    public function init(array $attribute = [], array $data = []): array
     {
         $this->prepareConfig($attribute, $data);
         $base = new ComponentFormBean($this->attribute); // 组件基础属性配置
@@ -61,25 +46,6 @@ abstract class BaseComponent implements ComponentConfigInterface, ComponentInter
         $component = array_merge($base->toArray(false), $data, $field);
         $component = $this->formatFormComponent($component);
         return $component;
-    }
-
-    /**
-     * 预览组件内容
-     * 实现接口`ComponentInterface`
-     * 
-     * @param $field array 字段信息
-     * @param $data array 数据值
-     * @return array
-     */
-    public function view($field = [], $data = []): array
-    {
-        $this->prepareConfig($field, $data);
-        $data = $this->parseData(); // 解析组件数据
-        $bean = new ComponentViewBean($this->attribute);
-        $bean->setProperty($data);
-        $bean->text = $this->transformValueToText($bean->value); // 格式化显示文本
-        $view = $this->formatViewContent($bean);
-        return $view;
     }
 
     /**
@@ -161,34 +127,6 @@ abstract class BaseComponent implements ComponentConfigInterface, ComponentInter
     }
 
     /**
-     * 格式化预览内容
-     * @param ComponentViewBean $bean
-     * @return array
-     */
-    protected function formatViewContent(ComponentViewBean $bean)
-    {
-        return $bean->toArray(false);
-    }
-
-    /**
-     * 转换值为文本
-     * @param $value mixed 值
-     * @return string
-     */
-    protected function transformValueToText($value)
-    {
-        $text = $value;
-
-        /* 从数据中获取文本 */
-        $data = $this->data;
-        if (isset($data['text']) && $data['text']) {
-            $text = $data['text'];
-        }
-
-        return $text;
-    }
-
-    /**
      * 获取组件选项
      * @return array
      */
@@ -225,5 +163,28 @@ abstract class BaseComponent implements ComponentConfigInterface, ComponentInter
             }
         }
         return $text;
+    }
+
+    /**
+     * 初始化配置
+     * 
+     * @param array $attribute
+     * @param array $data
+     */
+    private function prepareConfig(array $attribute, array $data): void
+    {
+        if ($attribute) {
+            /* 属性重命名 */
+            foreach ($this->fieldSchema as $name => $key) {
+                if (isset($attribute[$key])) {
+                    $attribute[$name] = $attribute[$key];
+                    unset($attribute[$key]);
+                }
+            }
+            $this->attribute = $attribute;
+        }
+        if ($data) {
+            $this->data = $data;
+        }
     }
 }

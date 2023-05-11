@@ -2,6 +2,8 @@
 
 namespace Qikecai\Sffrender\util;
 
+use Qikecai\Sffrender\data\items\ItemKeyValueBean;
+
 class StrHelper
 {
     protected static $snakeCache = [];
@@ -88,5 +90,29 @@ class StrHelper
         $value = ucwords(str_replace(['-', '_'], ' ', $value));
 
         return static::$studlyCache[$key] = str_replace(' ', '', $value);
+    }
+
+    /**
+     * 格式化配置项键值对
+     * 
+     * @param array $setting 配置项
+     * @return array
+     */
+    public static function formatSettingItem(array $setting): array {
+        $return = [];
+        foreach ($setting as $key => $payload) {
+            if ($payload === 'boolean') {
+                $return[] = new ItemKeyValueBean(['key' => $key, 'type' => 'boolean-radio']);
+            } elseif (is_array($payload)) {
+                $return[] = new ItemKeyValueBean(['key' => $key, 'type' => 'drop-down', 'options' => $payload]);
+            } elseif ($payload === 'number') {
+                $return[] = new ItemKeyValueBean(['key' => $key, 'type' => 'number']);
+            } elseif ($payload === 'textarea') {
+                $return[] = new ItemKeyValueBean(['key' => $key, 'type' => 'textarea']);
+            } else {
+                $return[] = new ItemKeyValueBean(['key' => $key, 'type' => 'input']);
+            }
+        }
+        return $return;
     }
 }

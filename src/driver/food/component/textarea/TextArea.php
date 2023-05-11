@@ -11,14 +11,6 @@ class TextArea extends Component
 {
     protected $attributeNames = [
         'rows', // 高度
+        'readonly', // 是否只读
     ];
-
-    /**
-     * 转换值为文本
-     * @param $value string 值
-     * @return string
-     */
-    protected function transformValueToText($value) {
-        return nl2br(strip_tags($value)); // 过滤标签并增加换行符
-    }
 }

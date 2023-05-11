@@ -30,37 +30,37 @@ interface FormConfigInterface
     public function getAssociateSettingItem(): array;
 
     /**
-     * 获取表格类型
-     * 
-     * @return array
-     */
-    public function getTableTypes(): array;
-
-    /**
-     * 获取表格数据源类型
-     * 
-     * @return array
-     */
-    public function getTableSourceTypes(): array;
-
-    /**
-     * 表格列表行自定义操作名称
-     * 
-     * @return array
-     */
-    public function getTableCustomActions(): array;
-
-    /**
-     * 获取组件类型
+     * 获取表单组件类型
      * 
      * @return array
      */
     public function getComponentTypes(): array;
 
     /**
-     * 获取验证器
+     * 获取表单验证器
      * 
      * @return array
      */
     public function getValidators(): array;
+
+    /**
+     * 获取关联检索组件类型
+     * 
+     * @return array
+     */
+    public function getAssociateSearchTypes(): array;
+
+    /**
+     * 获取组件属性设置键值对
+     * 
+     * @return array
+     */
+    public function getComponentAttributeSettingItem(): array;
+
+    /**
+     * 获取组件数据设置名称
+     * 
+     * @return array
+     */
+    public function getComponentDataSetting(): array;    
 }

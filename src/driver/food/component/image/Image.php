@@ -19,7 +19,6 @@ class Image extends Component
         'hideCropper', // 是否禁用图片裁剪组件
         'hideSearch', // 是否禁用图片检索组件
         'hideUpload', // 是否禁用图片上传组件
-        'kind', // 上传类别，'ng2-file-upload'
         'multiple', // 是否多图片
         'queueLimit', // 单次操作最大图片数目
         'repeat', // 是否可以选择重复的图片
@@ -34,18 +33,4 @@ class Image extends Component
         'searchConfig', // 检索配置
         'uploadConfig', // 上传配置
     ];
-
-    /**
-     * 格式化表单组件
-     * @param $component array 组件配置
-     * @return array
-     */
-    protected function formatFormComponent($component)
-    {
-        $component = parent::formatFormComponent($component);
-        if (isset($component['multiple'])) {
-            $component['multiple'] = ($component['multiple'] === 'false' || !$component['multiple']) ? false : true;
-        }
-        return $component;
-    }
 }

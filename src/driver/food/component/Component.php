@@ -9,6 +9,21 @@ use Qikecai\Sffrender\driver\BaseComponent;
 
 abstract class Component extends BaseComponent
 {
+    /* 字段映射表，客户端组件属性名称 => 数据库字段表字段名称 */
+    protected $fieldSchema = [
+        'help' => 'description',
+        'label' => 'title',
+        'max' => 'max_length',
+        'min' => 'min_length',
+        'name' => 'field_name',
+        'order' => 'weighting',
+        'require' => 'required',
+        'type' => 'type',
+        'validator' => 'validator',
+        'value' => 'default',
+        'block' => 'block_id',
+    ];
+
     /**
      * 格式化表单组件
      * 重写父类方法

@@ -11,6 +11,7 @@ class Radio extends Component
 {
     protected $attributeNames = [
         'all', // 是否显示全部
+        'readonly', // 是否只读
         'width', // 选项宽度
     ];
 
@@ -35,14 +36,5 @@ class Radio extends Component
             }
         }
         return $component;
-    }
-
-    /**
-     * 转换值为文本
-     * @param $value string 值
-     * @return string
-     */
-    protected function transformValueToText($value) {
-        return $this->fetchOptionText($value); // 从options中获取文本
     }
 }
