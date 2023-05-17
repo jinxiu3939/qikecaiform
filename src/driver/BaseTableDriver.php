@@ -3,11 +3,12 @@
 namespace Qikecai\Sffrender\driver;
 
 use Qikecai\Sffrender\TableConfigInterface;
+use Qikecai\Sffrender\TableRenderInterface;
 
 /**
  * 表格驱动基础类
  */
-abstract class BaseTableDriver implements TableConfigInterface
+abstract class BaseTableDriver implements TableConfigInterface, TableRenderInterface
 {
     /**
      * 获取表格数据源类型

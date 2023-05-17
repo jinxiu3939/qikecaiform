@@ -20,6 +20,7 @@
 - FormConfigInterface, 表单配置接口，提供外部调用表单配置
 - FormRenderInterface, 表单渲染接口，提供外部渲染表单
 - TableConfigInterface, 表格配置接口
+- TableRenderInterface, 表格渲染接口
 
 ### 类
 

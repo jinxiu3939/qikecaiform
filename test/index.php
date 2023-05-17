@@ -56,40 +56,82 @@ use Qikecai\Sffrender\TableFacade;
 //     ['id' => 1, 'title' => '基本信息', 'blockLayout' => 'tab', 'hideBlockBody' => false],
 //     ['blockId' => 2, 'blockTitle' => '设置', 'blockLayout' => 'url', 'hideBlockBody' => true],
 // ];
-$lang = [
-    ['code' => 'zh-Hans', 'label' => '简体中文'],
-    ['code' => 'en', 'label' => '英文'],
-];
+// $lang = [
+//     ['code' => 'zh-Hans', 'label' => '简体中文'],
+//     ['code' => 'en', 'label' => '英文'],
+// ];
 // var_dump(FormFacade::renderSetting($form, $segment, $lang));
 // echo ("渲染表单组件:\n");
-$fields = [
-    [
-        'id' => 1,
-        'title' => '标题',
-        'description' => '文章标题',
-        'max_length' => 255,
-        'min_length' => 10,
-        'field_name' => 'title',
-        'weighting' => 0,
-        'required' => true,
-        'type' => ['text-box', 'textBox'],
-        'validator' => 'chineseWord',
-        'default' => '',
-        'block_id' => 1,
+// $fields = [
+//     [
+//         'id' => 1,
+//         'title' => '标题',
+//         'description' => '文章标题',
+//         'max_length' => 255,
+//         'min_length' => 10,
+//         'field_name' => 'title',
+//         'weighting' => 0,
+//         'required' => true,
+//         'type' => ['text-box', 'textBox'],
+//         'validator' => 'chineseWord',
+//         'default' => '',
+//         'block_id' => 1,
+//     ],
+//     [
+//       'id' => 2,
+//       'title' => '描述',
+//       'description' => '文章简介',
+//       'max_length' => 255,
+//       'min_length' => 0,
+//       'field_name' => 'description',
+//       'weighting' => 0,
+//       'required' => false,
+//       'type' => ['text-area', 'textArea'],
+//       'validator' => '',
+//       'default' => '',
+//       'block_id' => 1,
+//   ],
+// ];
+// var_dump(FormFacade::renderComponents($fields, lang:$lang));
+$setting = [
+    'mode' => 'external',
+    'hideHeader' => false,
+    'hideSubHeader' => true,
+    'noDataMessage' => '暂无数据',
+    'attr' => ['id' => 'table', 'class' => 'responsive-table'],
+    'actions' => [
+        'columnTitle' => '操作',
+        'add' => false,
+        'edit' => false,
+        'delete' => false,
+        'position' => 'left',
+        'custom' => ['add', 'delete', 'log']
     ],
-    [
-      'id' => 2,
-      'title' => '描述',
-      'description' => '文章简介',
-      'max_length' => 255,
-      'min_length' => 0,
-      'field_name' => 'description',
-      'weighting' => 0,
-      'required' => false,
-      'type' => ['text-area', 'textArea'],
-      'validator' => '',
-      'default' => '',
-      'block_id' => 1,
-  ],
+    'filter' => false,
+    'edit' => false,
+    'add' => false,
+    'delete' => false,
+    'pager' => ['perPage' => 20],
+    'columns' => [
+        [
+            'fieldName' => 'id',
+            'title' => '编号',
+            'type' => ['text'],
+            'sort' => true,
+        ],
+        [
+            'fieldName' => 'title',
+            'title' => '标题',
+            'type' => ['text'],
+            'sort' => true,
+        ],
+        [
+            'fieldName' => 'cover',
+            'title' => '封面',
+            'type' => ['custom', 'image'],
+            'sort' => false,
+            'filter' => false,
+        ],
+    ]
 ];
-var_dump(FormFacade::renderComponents($fields, lang:$lang));
+var_dump(TableFacade::renderSetting($setting));

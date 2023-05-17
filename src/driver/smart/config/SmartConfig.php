@@ -13,6 +13,10 @@ class SmartConfig
     const COLUMN_FILTER_FUNCTION_ASSOCIATE = 'associate';
     const COLUMN_FILTER_FUNCTION_BOOLEAN = 'boolean';
 
+    /* 单元格类型 */
+    const COLUMN_TYPE_TEXT = 'text';
+    const COLUMN_TYPE_CUSTOM = 'custom';
+
     // 表格数据源类型
     const tableSourceTypes = [
         'sync',

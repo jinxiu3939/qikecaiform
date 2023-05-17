@@ -32,7 +32,7 @@ abstract class BaseComponent implements ComponentConfigInterface, ComponentInter
      * 辅助客户端表单组件构建表单
      * 赋值顺序依次是：字段基础配置，内容数据配置，字段自定义配置
      * 实现接口`ComponentInterface`
-     * 
+     *
      * @param array $attribute 组件属性
      * @param array $data 组件数据
      * @return array

@@ -17,7 +17,8 @@
 
 ### 接口分类
 
-- associate，关联模型
+- associate，关联/引用模型
+- content，内容
 - editor，富文本编辑器
 - file，文件/附件
 - items，子项/明细项

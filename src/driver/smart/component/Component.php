@@ -30,6 +30,6 @@ abstract class Component extends BaseComponent
      */
     protected function initColumn(array $attribute): array
     {
-      return $attribute;
+        return $attribute;
     }
 }
