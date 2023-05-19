@@ -94,9 +94,9 @@ class StrHelper
 
     /**
      * 格式化配置项键值对
-     * 
+     *
      * @param array $setting 配置项
-     * @return array
+     * @return ItemKeyValueBean[]
      */
     public static function formatSettingItem(array $setting): array {
         $return = [];

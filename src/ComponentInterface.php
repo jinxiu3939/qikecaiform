@@ -12,7 +12,7 @@ interface ComponentInterface
     /**
      * 配置表单组件
      * 组件赋值
-     * 
+     *
      * @param array $field 字段信息
      * @param array $data 数据值
      * @return array

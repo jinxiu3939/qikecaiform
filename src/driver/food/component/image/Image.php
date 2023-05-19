@@ -1,6 +1,7 @@
 <?php
 /**
  * 图片
+ * 属性配置因字段而异，数据配置为通用配置
  */
 
 namespace Qikecai\Sffrender\driver\food\component\image;

@@ -4,6 +4,7 @@ namespace Qikecai\Sffrender\driver\cover;
 
 use Qikecai\Sffrender\driver\BaseCardDriver;
 use Qikecai\Sffrender\driver\cover\config\CoverConfig;
+use Qikecai\Sffrender\data\items\ItemKeyValueBean;
 use Qikecai\Sffrender\util\StrHelper;
 
 /**
@@ -16,7 +17,7 @@ class CoverDriver extends BaseCardDriver
     /**
      * 获取页面设置项目属性
      * 
-     * @return array
+     * @return ItemKeyValueBean[]
      */
     public function getPageSettingItem(): array
     {

@@ -2,6 +2,7 @@
 
 namespace Qikecai\Sffrender;
 
+use Qikecai\Sffrender\data\items\ItemKeyValueBean;
 use Qikecai\Sffrender\bean\TableSettingBean;
 
 /**
@@ -12,7 +13,7 @@ class TableFacade
     /**
      * 获取列表设置键值对
      *
-     * @return array
+     * @return ItemKeyValueBean[]
      */
     public static function getTableSettingItem(): array
     {

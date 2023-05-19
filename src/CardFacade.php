@@ -2,6 +2,8 @@
 
 namespace Qikecai\Sffrender;
 
+use Qikecai\Sffrender\data\items\ItemKeyValueBean;
+
 /**
  * 卡片引擎门面类
  */
@@ -20,7 +22,7 @@ class CardFacade
     /**
      * 获取页面设置键值对
      * 
-     * @return array
+     * @return ItemKeyValueBean[]
      */
     public static function getPageSettingItem(): array
     {

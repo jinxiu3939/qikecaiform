@@ -14,6 +14,7 @@ class UEditor extends Component
         'autoFloatEnabled', // 是否保持toolbar的位置不动
         'autoHeightEnabled', // 是否自动行高
         'initialFrameHeight', // 初始化编辑器高度
+        'kind', // 编辑器默认配置种类
         'lang', // 语言包
         'maximumWords', // 最大字数
         'readonly', // 是否只读
@@ -29,7 +30,7 @@ class UEditor extends Component
 
     /**
      * 格式化表单组件
-     * @param $component array 组件配置
+     * @param array $component 组件配置
      * @return array
      */
     protected function formatFormComponent($component)

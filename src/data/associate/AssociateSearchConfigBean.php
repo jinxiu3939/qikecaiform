@@ -9,10 +9,10 @@ use Qikecai\Sffrender\bean\BaseBean;
  */
 class AssociateSearchConfigBean extends BaseBean
 {
-    public array $additionalParameter; // 异步检索参数
-    public array $conditions; // 表单检索条件
-    public string $mode; // 检索方式 'async' | 'sync'
+    public array $additionalParameter; // 附加参数
+    public array $conditions; // 检索条件
+    public string $endpoint; // 检索地址
+    public string $mode; // 检索方式 'async'|'sync'
     public array $result; // 同步检索结果
     public int $size; // 分页大小
-    public string $endpoint; // 检索地址
 }

@@ -2,8 +2,10 @@
 
 namespace Qikecai\Sffrender;
 
+use Qikecai\Sffrender\driver\BaseComponent;
 use Qikecai\Sffrender\bean\FormSettingBean;
 use Qikecai\Sffrender\data\FormDataFacade;
+use Qikecai\Sffrender\data\items\ItemKeyValueBean;
 
 /**
  * 表单引擎门面类
@@ -15,7 +17,7 @@ class FormFacade
     /**
      * 获取组件属性设置键值对
      * 
-     * @return array
+     * @return ItemKeyValueBean[]
      */
     public static function getComponentAttributeSettingItem(): array
     {
@@ -45,7 +47,7 @@ class FormFacade
     /**
      * 获取数据接口
      * 
-     * @return array
+     * @return string[]
      */
     public static function getDataInterface(): array
     {
@@ -55,7 +57,7 @@ class FormFacade
     /**
      * 获取表单设置键值对
      * 
-     * @return array
+     * @return ItemKeyValueBean[]
      */
     public static function getSettingItem(): array
     {
@@ -65,7 +67,7 @@ class FormFacade
     /**
      * 获取表单页面设置键值对
      * 
-     * @return array
+     * @return ItemKeyValueBean[]
      */
     public static function getPageSettingItem(): array
     {
@@ -75,7 +77,7 @@ class FormFacade
     /**
      * 获取关联表单设置键值对
      * 
-     * @return array
+     * @return ItemKeyValueBean[]
      */
     public static function getAssociateSettingItem(): array
     {
@@ -110,7 +112,7 @@ class FormFacade
      * @param array $fields
      * @param array $data
      * @param array|null $lang
-     * @return array
+     * @return BaseComponent[]
      */
     public static function renderComponents(array $fields, ?array $data = [], ?array $lang = []): array {
         return DriverFactory::instance()->renderComponents($fields, $data, $lang);

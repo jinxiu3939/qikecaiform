@@ -2,6 +2,8 @@
 
 namespace Qikecai\Sffrender;
 
+use Qikecai\Sffrender\data\items\ItemKeyValueBean;
+
 /**
  * 卡片配置接口
  */
@@ -10,7 +12,7 @@ interface CardConfigInterface
     /**
      * 获取页面设置项目属性
      * 
-     * @return array
+     * @return ItemKeyValueBean[]
      */
     public function getPageSettingItem(): array;
 
