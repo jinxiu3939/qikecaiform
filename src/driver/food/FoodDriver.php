@@ -170,13 +170,17 @@ class FoodDriver extends BaseDriver
                 foreach ($fields as $field) {
                     $component = $this->transformToComponent($field, $data);
                     if ($component) {
-                        $component['name'] .= '_' . $l['code']; // 多语言字段名称
-                        $component['block'] .= '_' . $l['code']; // 多语言块标识
-                        if (isset($field['title_i18n'][$l])) {
-                            $component['label'] = $field['title_i18n'][$l]; // 多语言字段标题
+                        $append_fix = $l['code']; // 多语言标识
+                        $component['name'] .= '_' . $append_fix; // 多语言字段名称
+                        $component['block'] .= '_' . $append_fix; // 多语言块标识
+                        if (is_array($component['value']) && isset($component['value'][$append_fix])) { // 多语言值
+                            $component['value'] = $component['value'][$append_fix];
                         }
-                        if (isset($field['description_i18n'][$l])) {
-                            $component['help'] = $field['description_i18n'][$l]; // 多语言字段描述
+                        if (isset($field['title_i18n'][$append_fix])) {
+                            $component['label'] = $field['title_i18n'][$append_fix]; // 多语言字段标题
+                        }
+                        if (isset($field['description_i18n'][$append_fix])) {
+                            $component['help'] = $field['description_i18n'][$append_fix]; // 多语言字段描述
                         }
                         $items[] = $component;
                     }
@@ -203,7 +207,7 @@ class FoodDriver extends BaseDriver
     private function transformToComponent(array $field, $data) {
         $name = $field['field_name']; // 字段名称
         $type = is_array($field['type']) ? $field['type'][0] : $field['type']; // 字段类型
-        $field_data = isset($data[$name]) ? $data[$name] : [];
+        $field_data = $data[$name] ?? [];
         $component = $this->instance($type, $field, $field_data); // 实例化组件对象
         return $component ? $component->init() : false; // 初始化组件
     }
