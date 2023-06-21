@@ -26,6 +26,7 @@ use Qikecai\Sffrender\driver\food\component\textbox\TextBox;
 use Qikecai\Sffrender\driver\food\component\ueditor\UEditor;
 use Qikecai\Sffrender\driver\food\component\video\Video;
 use Qikecai\Sffrender\driver\food\config\FoodConfig;
+use Qikecai\Sffrender\util\I18nHelper;
 
 /**
  * 七棵菜表单类
@@ -171,7 +172,7 @@ class FoodDriver extends BaseDriver
                     $component = $this->transformToComponent($field, $data);
                     if ($component) {
                         $append_fix = $l['code']; // 多语言标识
-                        $component['name'] .= '_' . $append_fix; // 多语言字段名称
+                        $component['name'] = I18nHelper::nominateFieldName($component['name'], $append_fix); // 多语言字段名称
                         $component['block'] .= '_' . $append_fix; // 多语言块标识
                         if (is_array($component['value']) && isset($component['value'][$append_fix])) { // 多语言值
                             $component['value'] = $component['value'][$append_fix];

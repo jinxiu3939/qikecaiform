@@ -2,13 +2,13 @@
 namespace Qikecai\Sffrender\bean;
 
 /**
- * 组件表单配置实体
+ * 表单组件实体
  * 
  * @package Qikecai\Sffrender\bean
  */
-class ComponentFormBean extends BaseBean
+class FormComponentBean extends BaseBean
 {
-    public string $type; // 类型
+    public mixed $type; // 类型
     public string $label; // 标签
     public string $max; // 最大值
     public string $min; // 最小值

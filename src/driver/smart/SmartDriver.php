@@ -134,15 +134,17 @@ class SmartDriver extends BaseTableDriver
             $intersect_cell = array_intersect_key($field, $cell); // 返回键相同的元素
             $cell = array_merge($cell, $intersect_cell); // field相同键的元素覆盖cell
 
-            /* 类型格式化 */
-            if (is_array($cell['type'])) {
-                $cell['renderComponent'] = isset($cell['type'][1]) ? $cell['type'][1] : null;
-                $cell['type'] = isset($cell['type'][0]) ? $cell['type'][0] : SmartConfig::COLUMN_TYPE_TEXT;
-            }
+            if (isset($cell['type'])) {
+                /* 类型格式化 */
+                if (is_array($cell['type'])) {
+                    $cell['renderComponent'] = isset($cell['type'][1]) ? $cell['type'][1] : null;
+                    $cell['type'] = isset($cell['type'][0]) ? $cell['type'][0] : SmartConfig::COLUMN_TYPE_TEXT;
+                }
 
-            /* 自定义渲染组件属性赋值 */
-            if ($cell['type'] === SmartConfig::COLUMN_TYPE_CUSTOM) {
-                $cell = $this->instance($cell['renderComponent'])->init($cell);
+                /* 自定义渲染组件属性赋值 */
+                if ($cell['type'] === SmartConfig::COLUMN_TYPE_CUSTOM) {
+                    $cell = $this->instance($cell['renderComponent'])->init($cell);
+                }
             }
 
             array_push($head, $cell);

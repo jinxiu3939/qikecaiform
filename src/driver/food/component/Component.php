@@ -36,10 +36,10 @@ abstract class Component extends BaseComponent
         if (isset($component['type']) && is_array($component['type'])) {
             /* 客户端工厂方法 */
             $method = isset($component['type'][1]) ? $component['type'][1] : ''; // 客户端工厂化方法名称
-            if (isset($component['data']) && $component['data']) {
-                $component['data']['method'] = $method;
+            if (isset($component['payload']) && $component['payload']) {
+                $component['payload']['method'] = $method;
             } else {
-                $component['data'] = ['method' => $method];
+                $component['payload'] = ['method' => $method];
             }
 
             /* 组件类型 */

@@ -3,7 +3,7 @@
 namespace Qikecai\Sffrender\driver;
 
 
-use Qikecai\Sffrender\bean\ComponentFormBean;
+use Qikecai\Sffrender\bean\FormComponentBean;
 use Qikecai\Sffrender\ComponentInterface;
 use Qikecai\Sffrender\data\option\OptionBean;
 use Qikecai\Sffrender\ComponentConfigInterface;
@@ -40,7 +40,7 @@ abstract class BaseComponent implements ComponentConfigInterface, ComponentInter
     public function init(array $attribute = [], array $data = []): array
     {
         $this->prepareConfig($attribute, $data);
-        $base = new ComponentFormBean($this->attribute); // 组件基础属性配置
+        $base = new FormComponentBean($this->attribute); // 组件基础属性配置
         $data = $this->parseData(); // 解析组件数据
         $field = $this->parseFieldConfig(); // 解析组件配置
         $component = array_merge($base->toArray(false), $data, $field);
@@ -178,7 +178,9 @@ abstract class BaseComponent implements ComponentConfigInterface, ComponentInter
             foreach ($this->fieldSchema as $name => $key) {
                 if (isset($attribute[$key])) {
                     $attribute[$name] = $attribute[$key];
-                    unset($attribute[$key]);
+                    if ($name !== $key) {
+                        unset($attribute[$key]);
+                    }
                 }
             }
             $this->attribute = $attribute;

@@ -92,7 +92,17 @@ class FormFacade
     public static function getValidators(): array 
     {
         return DriverFactory::instance()->getValidators(); // 值选项
-    }    
+    }
+    
+    /**
+     * 获取关联检索类型
+     * 
+     * @return array
+     */
+    public static function getAssociateSearchTypes(): array 
+    {
+        return DriverFactory::instance()->getAssociateSearchTypes(); // 值选项
+    }
 
     /**
      * 渲染表单设置

@@ -59,4 +59,44 @@ class TableFacade
     {
         return DriverFactory::instanceTable()->setting($setting);
     }
+
+    /**
+     * 获取表格列设置键值对
+     *
+     * @return ItemKeyValueBean[]
+     */
+    public static function getColumnSettingItem(): array
+    {
+        return DriverFactory::instanceTable()->getColumnSettingItem(); // 键选项
+    }
+
+    /**
+     * 获取表格样式设置键值对
+     *
+     * @return ItemKeyValueBean[]
+     */
+    public static function getTableAttrSettingItem(): array
+    {
+        return DriverFactory::instanceTable()->getTableAttrSettingItem(); // 键选项
+    }
+
+    /**
+     * 获取表格操作设置键值对
+     *
+     * @return ItemKeyValueBean[]
+     */
+    public static function getActionsSettingItem(): array
+    {
+        return DriverFactory::instanceTable()->getActionsSettingItem(); // 键选项
+    }
+
+    /**
+     * 获取表格分页设置键值对
+     *
+     * @return ItemKeyValueBean[]
+     */
+    public static function getPagerSettingItem(): array
+    {
+        return DriverFactory::instanceTable()->getPagerSettingItem(); // 键选项
+    }
 }

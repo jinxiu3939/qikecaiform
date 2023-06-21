@@ -15,5 +15,5 @@ interface TreeInterface
      * @param array $context 表单上下文
      * @return mixed
      */
-    public function getTree(array$field, ?array $value, ?array $context);
+    public function getTree(array $field, ?array $value, ?array $context);
 }
