@@ -7,6 +7,9 @@ namespace Qikecai\Sffrender\data;
 
 use Qikecai\Sffrender\data\associate\AssociateNameInterface;
 use Qikecai\Sffrender\data\associate\AssociateSearchConfigInterface;
+use Qikecai\Sffrender\data\content\TableContentInterface;
+use Qikecai\Sffrender\data\content\TextContentInterface;
+use Qikecai\Sffrender\data\content\ViewContentInterface;
 use Qikecai\Sffrender\data\editor\EditorConfigInterface;
 use Qikecai\Sffrender\data\file\FileCrawlConfigInterface;
 use Qikecai\Sffrender\data\file\FileCropperConfigInterface;
@@ -35,7 +38,10 @@ class FormDataFacade
         LinkageOptionInterface::class,
         OptionInterface::class,
         SpreadsheetHeaderInterface::class,
+        TableContentInterface::class,
+        TextContentInterface::class,
         TreeInterface::class,
+        ViewContentInterface::class,
     ];
 
     /**
@@ -44,9 +50,10 @@ class FormDataFacade
     public static function getDataInterface() {
         $return = [];
         foreach (self::COMPONENTS as $component) {
-            $interface_name = substr($component, strrpos($component, "\\") + 1, -9);
-            array_push($return, sprintf("get%s", $interface_name));
+            $interface_name = get_class_methods($component);
+            $return = array_merge($return, $interface_name);
         }
+
         return $return;
     }
 }

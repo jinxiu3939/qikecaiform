@@ -18,8 +18,8 @@ use Qikecai\Sffrender\TableFacade;
 // var_dump(FormFacade::getComponentDataSetting());
 // echo ("获取表单组件类型:\n");
 // var_dump(FormFacade::getComponentTypes());
-// echo ("获取数据接口:\n");
-// var_dump(FormFacade::getDataInterface());
+echo ("获取数据接口:\n");
+var_dump(FormFacade::getDataInterface());
 // echo ("获取表单设置键值对:\n");
 // var_dump(FormFacade::getSettingItem());
 // echo ("获取表单页面设置键值对:\n");
@@ -56,46 +56,46 @@ use Qikecai\Sffrender\TableFacade;
 //     ['id' => 1, 'title' => '基本信息', 'blockLayout' => 'tab', 'hideBlockBody' => false],
 //     ['blockId' => 2, 'blockTitle' => '设置', 'blockLayout' => 'url', 'hideBlockBody' => true],
 // ];
-$lang = [
-    ['code' => 'zh-Hans', 'label' => '简体中文'],
-    ['code' => 'en', 'label' => '英文'],
-];
+// $lang = [
+//     ['code' => 'zh-Hans', 'label' => '简体中文'],
+//     ['code' => 'en', 'label' => '英文'],
+// ];
 // var_dump(FormFacade::renderSetting($form, $segment, $lang));
-echo ("渲染表单组件:\n");
-$fields = [
-    [
-        'id' => 1,
-        'title' => '标题',
-        'description' => '文章标题',
-        'max_length' => 255,
-        'min_length' => 10,
-        'field_name' => 'title',
-        'weighting' => 0,
-        'required' => true,
-        'type' => ['text-box', 'textBox'],
-        'validator' => 'chineseWord',
-        'default' => '',
-        'block_id' => 1,
-        'title_i18n' => ['zh-Hans' => '标题', 'en' => 'title']
-    ],
-    [
-      'id' => 2,
-      'title' => '描述',
-      'description' => '文章简介',
-      'max_length' => 255,
-      'min_length' => 0,
-      'field_name' => 'description',
-      'weighting' => 0,
-      'required' => false,
-      'type' => ['text-area', 'textArea'],
-      'validator' => '',
-      'default' => '',
-      'block_id' => 1,
-      'description_i18n' => ['zh-Hans' => '文章简介', 'en' => 'article description']
-  ],
-];
-$data = ['title' => ['value' => ['zh-Hans' => '我爱我的家', 'en' => 'I love my family.']], 'description' => ['value' => '我的祖国和我']];
-var_dump(FormFacade::renderComponents($fields, lang:$lang, data: $data));
+// echo ("渲染表单组件:\n");
+// $fields = [
+//     [
+//         'id' => 1,
+//         'title' => '标题',
+//         'description' => '文章标题',
+//         'max_length' => 255,
+//         'min_length' => 10,
+//         'field_name' => 'title',
+//         'weighting' => 0,
+//         'required' => true,
+//         'type' => ['text-box', 'textBox'],
+//         'validator' => 'chineseWord',
+//         'default' => '',
+//         'block_id' => 1,
+//         'title_i18n' => ['zh-Hans' => '标题', 'en' => 'title']
+//     ],
+//     [
+//       'id' => 2,
+//       'title' => '描述',
+//       'description' => '文章简介',
+//       'max_length' => 255,
+//       'min_length' => 0,
+//       'field_name' => 'description',
+//       'weighting' => 0,
+//       'required' => false,
+//       'type' => ['text-area', 'textArea'],
+//       'validator' => '',
+//       'default' => '',
+//       'block_id' => 1,
+//       'description_i18n' => ['zh-Hans' => '文章简介', 'en' => 'article description']
+//   ],
+// ];
+// $data = ['title' => ['value' => ['zh-Hans' => '我爱我的家', 'en' => 'I love my family.']], 'description' => ['value' => '我的祖国和我']];
+// var_dump(FormFacade::renderComponents($fields, lang:$lang, data: $data));
 // $setting = [
 //     'mode' => 'external',
 //     'hideHeader' => false,

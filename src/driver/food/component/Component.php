@@ -21,7 +21,7 @@ abstract class Component extends BaseComponent
         'type' => 'type',
         'validator' => 'validator',
         'value' => 'default',
-        'block' => 'block_id',
+        'block' => 'segment_id',
     ];
 
     /**
