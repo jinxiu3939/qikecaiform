@@ -221,7 +221,7 @@ class FoodDriver extends BaseDriver
      */
     private function transformToBlock(array $segment) {
         $block = new FormSettingBean($segment);
-        if (isset($segment['id']) && $segment['id']) {
+        if (isset($segment['id'])) {
             $block->blockId = $segment['id'];
         }
         if (isset($segment['title']) && $segment['title']) {

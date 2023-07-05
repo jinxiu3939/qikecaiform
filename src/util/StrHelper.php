@@ -3,6 +3,7 @@
 namespace Qikecai\Sffrender\util;
 
 use Qikecai\Sffrender\data\items\ItemKeyValueBean;
+use Qikecai\Sffrender\data\option\OptionBean;
 
 class StrHelper
 {
@@ -104,7 +105,17 @@ class StrHelper
             if ($payload === 'boolean') {
                 $return[] = new ItemKeyValueBean(['key' => $key, 'type' => 'boolean-radio']);
             } elseif (is_array($payload)) {
-                $return[] = new ItemKeyValueBean(['key' => $key, 'type' => 'drop-down', 'options' => $payload]);
+                $options = [];
+                foreach ($payload as $value) {
+                    if ($value instanceof OptionBean) {
+                        $options[] = $value;
+                    } elseif (is_array($value)) {
+                        $options[] = new OptionBean($value);
+                    } else {
+                        $options[] = new OptionBean(['value' => $value, 'text' => $value]);
+                    }
+                }
+                $return[] = new ItemKeyValueBean(['key' => $key, 'type' => 'drop-down', 'options' => $options]);
             } elseif ($payload === 'number') {
                 $return[] = new ItemKeyValueBean(['key' => $key, 'type' => 'number']);
             } elseif ($payload === 'textarea') {

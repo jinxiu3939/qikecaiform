@@ -58,7 +58,7 @@ abstract class BaseBean implements ArrayAccess
                 if ($filter && $value === null) {
                     continue; // 过滤空值
                 }
-                $return[$key] = $this->formatValue($value); // 属性递归格式化
+                $return[$key] = $this->formatValue($value, $snake); // 属性递归格式化
             }
         }
         return $return;
@@ -142,17 +142,18 @@ abstract class BaseBean implements ArrayAccess
 
     /**
      * @param mixed $value
+     * @param bool $snake
      * @return mixed
      */
-    private function formatValue(mixed $value): mixed
+    private function formatValue(mixed $value, $snake = true): mixed
     {
         if (is_array($value)) {
             $return = [];
             foreach ($value as $key => $item) {
-                $return[$key] = $this->formatValue($item); // 递归
+                $return[$key] = $this->formatValue($item, $snake); // 递归
             }
         } else {
-            $return = $value instanceof BaseBean ? $value->toArray() : $value; // 属性递归
+            $return = $value instanceof BaseBean ? $value->toArray($snake) : $value; // 属性递归
         }
         return $return;
     }

@@ -27,8 +27,8 @@ class SmartConfig
     const actionSetting = [
         'columnTitle' => '',
         'add' => 'boolean',
-        'edit' => '',
-        'delete' => '',
+        'edit' => 'boolean',
+        'delete' => 'boolean',
         'position' => ['left', 'right']
     ];
 
