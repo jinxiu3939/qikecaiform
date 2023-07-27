@@ -88,7 +88,8 @@ class SmartConfig
         'hideHeader' => 'boolean',
         'hideSubHeader' => 'boolean',
         'noDataMessage' => '',
-        'rowClassFunction' => ''
+        'rowClassFunction' => '',
+        'selectMode' => ['multi'],
     ];
 
     // 表格属性设置

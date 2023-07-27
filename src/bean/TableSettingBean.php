@@ -22,4 +22,5 @@ class TableSettingBean extends BaseBean
     public $delete;
     public $pager;
     public $rowClassFunction;
+    public $selectMode;
 }
