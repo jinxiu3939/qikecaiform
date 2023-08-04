@@ -12,8 +12,9 @@ class CoverConfig
     // 组件类型
     const componentTypes = [
         'boolean-radio',
-        'image',
         'html',
+        'image',
+        'item-list',
         'text'
     ];
 
