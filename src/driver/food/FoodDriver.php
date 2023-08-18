@@ -207,7 +207,11 @@ class FoodDriver extends BaseDriver
      */
     private function transformToComponent(array $field, $data) {
         $name = $field['field_name']; // 字段名称
-        $type = is_array($field['type']) ? $field['type'][0] : $field['type']; // 字段类型
+        if (isset($field['type']) && $field['type']) {
+            $type = is_array($field['type']) ? $field['type'][0] : $field['type']; // 字段类型
+        } else {
+            $type = 'text-box';
+        }
         $field_data = $data[$name] ?? [];
         $component = $this->instance($type, $field, $field_data); // 实例化组件对象
         return $component ? $component->init() : false; // 初始化组件
