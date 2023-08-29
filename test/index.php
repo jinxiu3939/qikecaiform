@@ -18,8 +18,8 @@ use Qikecai\Sffrender\TableFacade;
 // var_dump(FormFacade::getComponentDataSetting());
 // echo ("获取表单组件类型:\n");
 // var_dump(FormFacade::getComponentTypes());
-echo ("获取数据接口:\n");
-var_dump(FormFacade::getDataInterface());
+// echo ("获取数据接口:\n");
+// var_dump(FormFacade::getDataInterface());
 // echo ("获取表单设置键值对:\n");
 // var_dump(FormFacade::getSettingItem());
 // echo ("获取表单页面设置键值对:\n");
@@ -61,41 +61,102 @@ var_dump(FormFacade::getDataInterface());
 //     ['code' => 'en', 'label' => '英文'],
 // ];
 // var_dump(FormFacade::renderSetting($form, $segment, $lang));
-// echo ("渲染表单组件:\n");
-// $fields = [
-//     [
-//         'id' => 1,
-//         'title' => '标题',
-//         'description' => '文章标题',
-//         'max_length' => 255,
-//         'min_length' => 10,
-//         'field_name' => 'title',
-//         'weighting' => 0,
-//         'required' => true,
-//         'type' => ['text-box', 'textBox'],
-//         'validator' => 'chineseWord',
-//         'default' => '',
-//         'block_id' => 1,
-//         'title_i18n' => ['zh-Hans' => '标题', 'en' => 'title']
-//     ],
-//     [
-//       'id' => 2,
-//       'title' => '描述',
-//       'description' => '文章简介',
-//       'max_length' => 255,
-//       'min_length' => 0,
-//       'field_name' => 'description',
-//       'weighting' => 0,
-//       'required' => false,
-//       'type' => ['text-area', 'textArea'],
-//       'validator' => '',
-//       'default' => '',
-//       'block_id' => 1,
-//       'description_i18n' => ['zh-Hans' => '文章简介', 'en' => 'article description']
-//   ],
-// ];
-// $data = ['title' => ['value' => ['zh-Hans' => '我爱我的家', 'en' => 'I love my family.']], 'description' => ['value' => '我的祖国和我']];
-// var_dump(FormFacade::renderComponents($fields, lang:$lang, data: $data));
+echo ("渲染表单组件:\n");
+$fields = [
+    [
+        'id' => 1,
+        'title' => '标题',
+        'description' => '文章标题',
+        'max_length' => 255,
+        'min_length' => 10,
+        'field_name' => 'title',
+        'weighting' => 0,
+        'required' => true,
+        'type' => ['text-box', 'textBox'],
+        'validator' => 'chineseWord',
+        'default' => '',
+        'block_id' => 1,
+        'title_i18n' => ['zh-Hans' => '标题', 'en' => 'title']
+    ],
+    [
+      'id' => 2,
+      'title' => '描述',
+      'description' => '文章简介',
+      'max_length' => 255,
+      'min_length' => 0,
+      'field_name' => 'description',
+      'weighting' => 0,
+      'required' => false,
+      'type' => ['text-area', 'textArea'],
+      'validator' => '',
+      'default' => '',
+      'block_id' => 1,
+      'description_i18n' => ['zh-Hans' => '文章简介', 'en' => 'article description']
+    ],
+    [
+        'id' => 3,
+        'title' => '时间',
+        'description' => '开始时间',
+        'max_length' => 0,
+        'min_length' => 0,
+        'field_name' => 'start-time',
+        'weighting' => 0,
+        'required' => false,
+        'type' => ['clock', 'clock'],
+        'validator' => '',
+        'default' => '',
+        'config' => ['now' => true]
+    ],
+    [
+        'id' => 4,
+        'title' => '周期配置',
+        'description' => '',
+        'max_length' => 0,
+        'min_length' => 0,
+        'field_name' => 'date-config',
+        'weighting' => 0,
+        'required' => false,
+        'type' => ['popup-custom', 'popupCustom'],
+        'validator' => '',
+        'default' => '',
+        'config' => ['renderComponent' => 'date-config']
+    ],
+    [
+        'id' => 5,
+        'title' => '表单',
+        'description' => '',
+        'max_length' => 0,
+        'min_length' => 0,
+        'field_name' => 'associate-form',
+        'weighting' => 0,
+        'required' => false,
+        'type' => ['linkage-box', 'linkageBox'],
+        'validator' => '',
+        'default' => '',
+    ],
+    [
+        'id' => 6,
+        'title' => '其他',
+        'description' => '自定义表单',
+        'max_length' => 0,
+        'min_length' => 0,
+        'field_name' => 'custom-config',
+        'weighting' => 0,
+        'required' => false,
+        'type' => ['custom', 'custom'],
+        'validator' => '',
+        'default' => '',
+        'config' => ['renderComponent' => 'date-config']
+    ],
+];
+$data = [
+    'title' => ['value' => ['zh-Hans' => '我爱我的家', 'en' => 'I love my family.']],
+    'description' => ['value' => '我的祖国和我'],
+    'start-time' => [],
+    'custom-config' => [],
+    'date-config' => ['text' => 'date-config'],
+];
+var_dump(FormFacade::renderComponents($fields, lang:$lang, data: $data));
 // $setting = [
 //     'mode' => 'external',
 //     'hideHeader' => false,

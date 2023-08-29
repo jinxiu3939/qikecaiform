@@ -7,6 +7,8 @@ use Qikecai\Sffrender\driver\BaseDriver;
 use Qikecai\Sffrender\driver\food\component\checkbox\Checkbox;
 use Qikecai\Sffrender\driver\food\component\checkboxtree\CheckboxTree;
 use Qikecai\Sffrender\driver\food\component\ckeditor\CkEditor;
+use Qikecai\Sffrender\driver\food\component\clock\Clock;
+use Qikecai\Sffrender\driver\food\component\custom\Custom;
 use Qikecai\Sffrender\driver\food\component\datepicker\DatePicker;
 use Qikecai\Sffrender\driver\food\component\dropdownbox\DropDownBox;
 use Qikecai\Sffrender\driver\food\component\file\File;
@@ -17,6 +19,7 @@ use Qikecai\Sffrender\driver\food\component\linkagebox\LinkageBox;
 use Qikecai\Sffrender\driver\food\component\markdowneditor\MarkdownEditor;
 use Qikecai\Sffrender\driver\food\component\passwordbox\PasswordBox;
 use Qikecai\Sffrender\driver\food\component\popupcheckbox\PopupCheckbox;
+use Qikecai\Sffrender\driver\food\component\popupcustom\PopupCustom;
 use Qikecai\Sffrender\driver\food\component\popupradio\PopupRadio;
 use Qikecai\Sffrender\driver\food\component\popuptree\PopupTree;
 use Qikecai\Sffrender\driver\food\component\radio\Radio;
@@ -38,6 +41,8 @@ class FoodDriver extends BaseDriver
         'checkbox' => Checkbox::class,
         'checkbox-tree' => CheckboxTree::class,
         'ck-editor' => CkEditor::class,
+        'clock' => Clock::class,
+        'custom' => Custom::class,
         'date-picker' => DatePicker::class,
         'drop-down-box' => DropDownBox::class,
         'file' => File::class,
@@ -48,6 +53,7 @@ class FoodDriver extends BaseDriver
         'markdown-editor' => MarkdownEditor::class,
         'password-box' => PasswordBox::class,
         'popup-checkbox' => PopupCheckbox::class,
+        'popup-custom' => PopupCustom::class,
         'popup-radio' => PopupRadio::class,
         'popup-tree' => PopupTree::class,
         'radio' => Radio::class,
