@@ -82,6 +82,7 @@ class FoodConfig {
             'mobileTextBox',
             'urlTextBox'
         ],
+        'text-combine' => ['textCombine'],
         'u-editor' => ['uEditor'],
         'video' => ['video'],
     ];

@@ -26,6 +26,7 @@ use Qikecai\Sffrender\driver\food\component\radio\Radio;
 use Qikecai\Sffrender\driver\food\component\spreadsheet\Spreadsheet;
 use Qikecai\Sffrender\driver\food\component\textarea\TextArea;
 use Qikecai\Sffrender\driver\food\component\textbox\TextBox;
+use Qikecai\Sffrender\driver\food\component\textcombine\TextCombine;
 use Qikecai\Sffrender\driver\food\component\ueditor\UEditor;
 use Qikecai\Sffrender\driver\food\component\video\Video;
 use Qikecai\Sffrender\driver\food\config\FoodConfig;
@@ -60,6 +61,7 @@ class FoodDriver extends BaseDriver
         'spreadsheet' => Spreadsheet::class,
         'text-area' => TextArea::class,
         'text-box' => TextBox::class,
+        'text-combine' => TextCombine::class,
         'u-editor' => UEditor::class,
         'video' => Video::class,
     ];

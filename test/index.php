@@ -148,6 +148,19 @@ $fields = [
         'default' => '',
         'config' => ['renderComponent' => 'date-config']
     ],
+    [
+        'id' => 7,
+        'title' => '地图坐标',
+        'description' => '百度地图',
+        'max_length' => 0,
+        'min_length' => 0,
+        'field_name' => 'map',
+        'weighting' => 0,
+        'required' => false,
+        'type' => ['text-combine', 'textCombine'],
+        'validator' => '',
+        'default' => '',
+    ],
 ];
 $data = [
     'title' => ['value' => ['zh-Hans' => '我爱我的家', 'en' => 'I love my family.']],
@@ -155,8 +168,9 @@ $data = [
     'start-time' => [],
     'custom-config' => [],
     'date-config' => ['text' => 'date-config'],
+    'map' => ['attributes' => [['text' => '经度', 'value' => 'longitude'], ['text' => '维度', 'value' => 'latitude']]]
 ];
-var_dump(FormFacade::renderComponents($fields, lang:$lang, data: $data));
+var_dump(FormFacade::renderComponents($fields, data: $data));
 // $setting = [
 //     'mode' => 'external',
 //     'hideHeader' => false,
