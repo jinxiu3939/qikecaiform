@@ -11,7 +11,7 @@ class CardFacade
 {
     /**
      * 获取组件类型
-     * 
+     *
      * @return array
      */
     public static function getComponentTypes(): array
@@ -21,11 +21,21 @@ class CardFacade
 
     /**
      * 获取页面设置键值对
-     * 
+     *
      * @return ItemKeyValueBean[]
      */
     public static function getPageSettingItem(): array
     {
         return DriverFactory::instanceCard()->getPageSettingItem(); // 键选项
+    }
+
+    /**
+     * 获取挂件设置键值对
+     *
+     * @return ItemKeyValueBean[]
+     */
+    public static function getWidgetSettingItem(): array
+    {
+        return DriverFactory::instanceCard()->getWidgetSettingItem(); // 键选项
     }
 }

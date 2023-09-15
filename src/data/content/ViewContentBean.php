@@ -11,4 +11,5 @@ class ViewContentBean extends BaseBean
 {
     public string $title; // 标题
     public array $fields; // 组件
+    public ?array $block; // 分组
 }

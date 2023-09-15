@@ -16,7 +16,7 @@ class CoverDriver extends BaseCardDriver
 {
     /**
      * 获取页面设置项目属性
-     * 
+     *
      * @return ItemKeyValueBean[]
      */
     public function getPageSettingItem(): array
@@ -26,11 +26,21 @@ class CoverDriver extends BaseCardDriver
 
     /**
      * 获取组件类型
-     * 
+     *
      * @return array
      */
     public function getComponentTypes(): array
     {
       return CoverConfig::componentTypes;
+    }
+
+    /**
+     * 获取挂件设置项目属性
+     *
+     * @return array
+     */
+    public function getWidgetSettingItem(): array
+    {
+        return StrHelper::formatSettingItem(CoverConfig::widgetSetting);
     }
 }

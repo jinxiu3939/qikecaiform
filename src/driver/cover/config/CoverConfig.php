@@ -9,6 +9,9 @@ namespace Qikecai\Sffrender\driver\cover\config;
  */
 class CoverConfig
 {
+    // 栅格布局宽度
+    const gridWidth = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
     // 组件类型
     const componentTypes = [
         'boolean-radio',
@@ -22,5 +25,12 @@ class CoverConfig
     const pageSetting = [
         'height' => 'number',
         'width' => 'number'
+    ];
+
+    // 挂件设置
+    const widgetSetting = [
+        'width' => self::gridWidth,
+        'label_width' => self::gridWidth,
+        'body_width' => self::gridWidth,
     ];
 }

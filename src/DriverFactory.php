@@ -32,7 +32,7 @@ class DriverFactory
      * @param string $driver 驱动名称
      * @return BaseTableDriver
      */
-    public static function instanceTable($driver = 'smart') {
+    public static function instanceTable($driver = 'smart'): BaseTableDriver {
         $name = sprintf('%sDriver', StrHelper::studly($driver)); // 下划线转大驼峰
         $table = sprintf('Qikecai\\Sffrender\\driver\\%s\\%s', $driver, $name);
         return new $table();
@@ -43,7 +43,7 @@ class DriverFactory
      * @param string $driver 驱动名称
      * @return BaseCardDriver
      */
-    public static function instanceCard($driver = 'cover') {
+    public static function instanceCard($driver = 'cover'): BaseCardDriver {
         $name = sprintf('%sDriver', StrHelper::studly($driver)); // 下划线转大驼峰
         $table = sprintf('Qikecai\\Sffrender\\driver\\%s\\%s', $driver, $name);
         return new $table();

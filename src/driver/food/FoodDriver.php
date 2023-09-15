@@ -151,7 +151,7 @@ class FoodDriver extends BaseDriver
                     }
                     $form_block[] = $block_bean;
                 }
-                $lang_block->children = $form_block; // 表单块作为多语言块的字块
+                $lang_block->children = $form_block; // 表单块作为多语言块的子块
 
                 $lang_children[] = $lang_block;
             }
