@@ -11,6 +11,7 @@ class Checkbox extends Radio
 {
     protected $attributeNames = [
         'clear', // 是否清除无效的值
+        'drag', // 是否可拖动
         'readonly', // 是否只读
         'width', // 选项宽度
     ];

@@ -10,6 +10,7 @@ use Qikecai\Sffrender\driver\food\component\popupradio\PopupRadio;
 class PopupCheckbox extends PopupRadio
 {
     protected $attributeNames = [
+        'drag', // 是否可拖动
         'readonly', // 是否只读，boolean
     ];
 
