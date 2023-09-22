@@ -15,6 +15,7 @@ class CoverConfig
     // 组件类型
     const componentTypes = [
         'boolean-radio',
+        'custom',
         'html',
         'image',
         'item-list',
@@ -32,5 +33,7 @@ class CoverConfig
         'width' => self::gridWidth,
         'label_width' => self::gridWidth,
         'body_width' => self::gridWidth,
+        'renderComponent' => '',
+        'onComponentInitFunction' => ''
     ];
 }
