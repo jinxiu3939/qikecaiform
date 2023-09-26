@@ -47,6 +47,7 @@ class FoodConfig {
 
     // 组件类型 => 子类型（客户端工厂方法名称）
     const types = [
+        'attachment' => ['attachment'],
         'checkbox' => ['checkbox'],
         'checkbox-tree' => ['checkboxTree'],
         'ck-editor' => ['ckEditor'],

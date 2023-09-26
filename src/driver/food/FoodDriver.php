@@ -12,6 +12,7 @@ use Qikecai\Sffrender\driver\food\component\custom\Custom;
 use Qikecai\Sffrender\driver\food\component\datepicker\DatePicker;
 use Qikecai\Sffrender\driver\food\component\dropdownbox\DropDownBox;
 use Qikecai\Sffrender\driver\food\component\file\File;
+use Qikecai\Sffrender\driver\food\component\attachment\Attachment;
 use Qikecai\Sffrender\driver\food\component\image\Image;
 use Qikecai\Sffrender\driver\food\component\itemlist\ItemList;
 use Qikecai\Sffrender\driver\food\component\keyword\Keyword;
@@ -39,6 +40,7 @@ class FoodDriver extends BaseDriver
 {
     /* 组件列表，key为组件类型，必须和配置文件中的types保持一致 */
     protected $components = [
+        'attachment' => Attachment::class,
         'checkbox' => Checkbox::class,
         'checkbox-tree' => CheckboxTree::class,
         'ck-editor' => CkEditor::class,
