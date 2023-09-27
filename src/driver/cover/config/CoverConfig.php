@@ -14,11 +14,13 @@ class CoverConfig
 
     // 组件类型
     const componentTypes = [
+        'attachment',
         'boolean-radio',
         'custom',
         'html',
         'image',
         'item-list',
+        'mark-down',
         'text'
     ];
 

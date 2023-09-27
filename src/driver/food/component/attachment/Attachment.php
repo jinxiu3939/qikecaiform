@@ -16,6 +16,7 @@ class Attachment extends Component
         'multiple', // 是否支持多文件上传
         'queueLimit', // 单次操作最大文件数目
         'maxUploadFileSize', // 上传文件最大尺寸
+        'allowedFileType'
     ];
 
     protected $dataNames = [
