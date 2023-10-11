@@ -13,7 +13,8 @@ class AssociateSearchFormComponentBean extends BaseBean
     public string $type; // 组件类型 `drop-down`|`drop-down-filter`|`boolean-radio`|`number`|`textarea`
     public string $value; // 组件名称
     public array $options; // 选项
-    public int $size; // 分页大小
+    public $size; // 分页大小
     public string $endpoint; // 检索地址
     public string $mode; // 选项检索方式
+    public string $param; // 检索参数
 }
