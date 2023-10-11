@@ -13,6 +13,7 @@ class AssociateSearchConfigBean extends BaseBean
     public array $conditions; // 检索条件
     public string $endpoint; // 检索地址
     public string $mode; // 检索方式 'async'|'sync'
+    public string $param; // 异步检索参数
     public array $result; // 同步检索结果
-    public int $size; // 分页大小
+    public $size; // 分页大小
 }

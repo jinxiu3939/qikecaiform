@@ -97,10 +97,11 @@ class FoodConfig {
         'number'
     ];
 
-    // 关联检索可配置项
+    // 关联检索选项类型检索配置项
     const associateSearch = [
         'mode' => ['async', 'sync'], // 检索方式
-        'size' => 'number', // 检索分页大小
+        'size' => 'number', // 异步检索分页大小
         'endpoint' => '', // 异步检索接口
+        'param' => '', // 异步检索参数
     ];
 }
