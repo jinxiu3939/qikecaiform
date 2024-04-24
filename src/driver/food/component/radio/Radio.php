@@ -11,6 +11,7 @@ class Radio extends Component
 {
     protected $attributeNames = [
         'all', // 是否显示全部
+        'empty', // 是否显示空选项
         'readonly', // 是否只读
         'width', // 选项宽度
     ];
