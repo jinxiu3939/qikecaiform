@@ -21,7 +21,8 @@ class CoverConfig
         'image',
         'item-list',
         'mark-down',
-        'text'
+        'text',
+        'video'
     ];
 
     // 页面设置

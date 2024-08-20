@@ -10,5 +10,5 @@ use Qikecai\Sffrender\bean\BaseBean;
 class AssociateContentBean extends BaseBean
 {
     public $id; // 值
-    public string $name; // 名称
+    public ?string $name; // 名称
 }
