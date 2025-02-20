@@ -31,7 +31,7 @@ class I18nHelper
                     $return[self::FIELD_NAME_DELIMITER][$i18n] = ['i18n' => $i18n]; // 初始化多语言分组
                 }
                 $key = substr($name, 0, $delimiter_position);
-                $return[self::FIELD_NAME_DELIMITER][$i18n][$key] = $input ?: ($data[$key] ?? null); // 多语言值为空，取默认值
+                $return[self::FIELD_NAME_DELIMITER][$i18n][$key] = $input ?: ($data[$key] ?? ''); // 多语言值为空，取默认值
             } else {
                 $return[$name] = $input;
             }

@@ -12,9 +12,9 @@ use Qikecai\Sffrender\driver\food\component\Component;
 class ItemList extends Component
 {
     protected $attributeNames = [
-        'height', // 列表大小 'small' | 'medium' | 'large
+        'height', // 列表大小 'small' | 'medium' | 'large'
         'kind', // 弹出框类型 'item' | 'key-value'
-        'size', // 子项目弹框大小 'medium' | 'large
+        'size', // 子项目弹框大小 'medium' | 'large'
     ]; // 字段配置项名称
 
     protected $dataNames = [

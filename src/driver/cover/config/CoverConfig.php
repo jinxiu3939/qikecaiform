@@ -15,6 +15,7 @@ class CoverConfig
     // 组件类型
     const componentTypes = [
         'attachment',
+        'associate',
         'boolean-radio',
         'custom',
         'html',

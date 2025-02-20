@@ -148,7 +148,7 @@ class FoodDriver extends BaseDriver
                 foreach ($block as $b) {
                     $block_bean = $this->transformToBlock($b);
                     $block_bean->blockId .= '_' . $l['code']; // 多语言块标识
-                    if (isset($b['title_i18n'][$l])) {
+                    if (isset($b['title_i18n']) && is_array($b['title_i18n']) && $b['title_i18n'] && isset($b['title_i18n'][$l])) {
                         $block_bean->blockTitle = $b['title_i18n'][$l]; // 多语言块标题
                     }
                     $form_block[] = $block_bean;
@@ -183,9 +183,11 @@ class FoodDriver extends BaseDriver
                     if ($component) {
                         $append_fix = $l['code']; // 多语言标识
                         $component['name'] = I18nHelper::nominateFieldName($component['name'], $append_fix); // 多语言字段名称
-                        $component['block'] .= '_' . $append_fix; // 多语言块标识
-                        if (is_array($component['value']) && isset($component['value'][$append_fix])) { // 多语言值
-                            $component['value'] = $component['value'][$append_fix];
+                        if (isset($component['block'])) {
+                            $component['block'] .= '_' . $append_fix; // 多语言块标识
+                        }
+                        if (isset($component['value']) && is_array($component['value']) && $component['value']) { // 多语言值
+                            $component['value'] = $component['value'][$append_fix] ?? '';
                         }
                         if (isset($field['title_i18n'][$append_fix])) {
                             $component['label'] = $field['title_i18n'][$append_fix]; // 多语言字段标题
