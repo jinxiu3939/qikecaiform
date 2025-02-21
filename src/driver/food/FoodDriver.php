@@ -100,7 +100,7 @@ class FoodDriver extends BaseDriver
 
     /**
      * 获取表单设置项目属性
-     * 
+     *
      * @return array
      */
     public function getFormSettingItem(): array
@@ -110,7 +110,7 @@ class FoodDriver extends BaseDriver
 
     /**
      * 获取关联表单设置项目属性
-     * 
+     *
      * @return array
      */
     public function getAssociateSettingItem(): array {
@@ -119,7 +119,7 @@ class FoodDriver extends BaseDriver
 
     /**
      * 获取关联检索组件类型
-     * 
+     *
      * @return array
      */
     public function getAssociateSearchTypes(): array
@@ -129,39 +129,42 @@ class FoodDriver extends BaseDriver
 
     /**
      * 表单设置
-     * 
+     *
      * @param array $form 表单
-     * @param array $block 块 [id, title, title_i18n]
+     * @param array $block_list 字段块 [id, title, title_i18n]
      * @param array $lang 多语言 [code, label]
      * @return FormSettingBean
      */
-    public function setting(array $form, ?array $block, ?array $lang): FormSettingBean
+    public function setting(array $form, ?array $block_list, ?array $langs): FormSettingBean
     {
         $return = new FormSettingBean($form);        
 
-        /* 构造表单模型 */
-        if ($lang) { // 多语言
-            $lang_children = []; // 多语言块
-            foreach ($lang as $l) {
-                $lang_block = new FormSettingBean(['block_title' => $l['label'], 'block_id' => 'block_' . $l['code']]);
-                $form_block = []; // 表单块
-                foreach ($block as $b) {
-                    $block_bean = $this->transformToBlock($b);
-                    $block_bean->blockId .= '_' . $l['code']; // 多语言块标识
-                    if (isset($b['title_i18n']) && is_array($b['title_i18n']) && $b['title_i18n'] && isset($b['title_i18n'][$l])) {
-                        $block_bean->blockTitle = $b['title_i18n'][$l]; // 多语言块标题
+        /* 构造表单快 */
+        if ($langs) { // 多语言
+            $lang_blocks = []; // 多语言块
+            foreach ($langs as $lang) {
+                $append_fix = $lang['code']; // 多语言标识
+                /* 语言块编号约定为0 */
+                $lang_block = new FormSettingBean(['block_title' => $lang['label'], 'block_id' => '0_' . $append_fix]);
+                $form_blocks = []; // 表单块
+                /* 为每个表单快添加多语言标识，包括编号和标题 */
+                foreach ($block_list as $block) {
+                    $form_block = $this->transformToBlock($block);
+                    $form_block->blockId .= '_' . $append_fix; // 多语言块标识
+                    if (!empty($block['title_i18n']) && isset($block['title_i18n'][$append_fix])) {
+                        $form_block->blockTitle = $block['title_i18n'][$append_fix]; // 多语言块标题
                     }
-                    $form_block[] = $block_bean;
+                    $form_blocks[] = $form_block;
                 }
-                $lang_block->children = $form_block; // 表单块作为多语言块的子块
+                $lang_block->children = $form_blocks; // 表单块作为多语言块的子块
 
-                $lang_children[] = $lang_block;
+                $lang_blocks[] = $lang_block;
             }
-            $return->children = $lang_children;
-        } else if ($block) {
+            $return->children = $lang_blocks;
+        } else if ($block_list) { // 表单快
             $children = [];
-            foreach ($block as $b) {
-                $children[] = $this->transformToBlock($b);
+            foreach ($block_list as $block) {
+                $children[] = $this->transformToBlock($block);
             }
             $return->children = $children;
         }
@@ -171,22 +174,26 @@ class FoodDriver extends BaseDriver
 
     /**
      * 渲染表单组件
-     * 
+     *
+     * @param array $fields 字段
+     * @param array $data 数据 [id, title, title_i18n]
+     * @param array $langs 多语言 [code, label]
      * @return array
      */
-    public function renderComponents(array $fields, array $data, ?array $lang): array {
+    public function renderComponents(array $fields, array $data, ?array $langs): array {
         $items = [];
-        if ($lang) { // 多语言
-            foreach ($lang as $l) {
+        if ($langs) { // 多语言
+            /* 为每个字段添加多语言标识，包括名称、块、标签和提示；并且设置多语言值value */
+            foreach ($langs as $lang) {
                 foreach ($fields as $field) {
                     $component = $this->transformToComponent($field, $data);
                     if ($component) {
-                        $append_fix = $l['code']; // 多语言标识
+                        $append_fix = $lang['code']; // 多语言标识
                         $component['name'] = I18nHelper::nominateFieldName($component['name'], $append_fix); // 多语言字段名称
                         if (isset($component['block'])) {
                             $component['block'] .= '_' . $append_fix; // 多语言块标识
                         }
-                        if (isset($component['value']) && is_array($component['value']) && $component['value']) { // 多语言值
+                        if (isset($component['value']) && is_array($component['value']) && $component['value']) { // 获取多语言值
                             $component['value'] = $component['value'][$append_fix] ?? '';
                         }
                         if (isset($field['title_i18n'][$append_fix])) {
@@ -231,7 +238,7 @@ class FoodDriver extends BaseDriver
 
     /**
      * 字段分组转换为表单块
-     * 
+     *
      * @param array $segment [id,title]
      * @return FormSettingBean
      */
