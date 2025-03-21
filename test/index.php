@@ -175,6 +175,36 @@ $fields = [
         'block_id' => 1,
         'config' => ['drag' => true]
     ],
+    [
+        'id' => 9,
+        'title' => '浏览量',
+        'description' => '文章浏览量',
+        'max_length' => 0,
+        'min_length' => 0,
+        'field_name' => 'views',
+        'weighting' => 0,
+        'required' => false,
+        'type' => ['text-diff', 'textDiff'],
+        'validator' => '',
+        'default' => '',
+        'tooltip' => true,
+        'placeholder' => '请输入浏览量'
+    ],
+    [
+        'id' => 10,
+        'title' => '订单总数',
+        'description' => '销售订单总数',
+        'max_length' => 0,
+        'min_length' => 0,
+        'field_name' => 'orders',
+        'weighting' => 0,
+        'required' => false,
+        'type' => ['text-range', 'textRange'],
+        'validator' => '',
+        'default' => '',
+        'tooltip' => true,
+        'placeholder' => ['start' => '请输入最小销售订单数', 'end' => '请输入最大销售订单数'],
+    ],
 ];
 $data = [
     'title' => ['value' => ['zh-Hans' => '我爱我的家', 'en' => 'I love my family.']],

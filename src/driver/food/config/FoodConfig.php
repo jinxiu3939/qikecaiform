@@ -84,6 +84,8 @@ class FoodConfig {
             'urlTextBox'
         ],
         'text-combine' => ['textCombine'],
+        'text-diff' => ['textDiff'],
+        'text-range' => ['textRange'],
         'u-editor' => ['uEditor'],
         'video' => ['video'],
     ];
