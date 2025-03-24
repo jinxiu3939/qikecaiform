@@ -18,6 +18,6 @@ class TextDiff extends Component
     ]; // 字段配置项名称
 
     protected $dataNames = [
-        'operations', // 操作符
+        'operators', // 操作符
     ];
 }

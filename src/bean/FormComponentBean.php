@@ -21,4 +21,5 @@ class FormComponentBean extends BaseBean
     public ?bool $disabled; // 是否禁用
     public ?string $block; // block标识
     public ?array $payload; // 自定义配置数据
+    public ?bool $tooltip; // 是否显示提示
 }

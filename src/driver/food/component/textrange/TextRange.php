@@ -11,9 +11,6 @@ class TextRange extends Component
 {
     protected $attributeNames = [
         'kind', // 文本框类型
+        'placeholder', // 提示
     ]; // 字段配置项名称
-
-    protected $dataNames = [
-        'placeholder', // 提示，{start: string, end: string}
-    ];
 }
