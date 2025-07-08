@@ -71,17 +71,18 @@ class FoodConfig {
         'text-area' => ['textArea'],
         'text-box' => [
             'textBox',
-            'timeTextBox',
-            'dateTimeLocalTextBox',
             'numberTextBox',
+            'chineseWordTextBox',
+            'dateTextBox',
+            'dateTimeLocalTextBox',
+            'emailTextBox',
+            'englishWordTextBox',
+            'letterNameTextBox',
+            'mobileTextBox',
             'passwordTextBox',
             'rangeTextBox',
-            'emailTextBox',
-            'letterNameTextBox',
-            'chineseWordTextBox',
-            'englishWordTextBox',
-            'mobileTextBox',
-            'urlTextBox'
+            'timeTextBox',
+            'urlTextBox',
         ],
         'text-combine' => ['textCombine'],
         'text-diff' => ['textDiff'],
@@ -96,7 +97,9 @@ class FoodConfig {
         'drop-down',
         'drop-down-filter',
         'input',
-        'number'
+        'number',
+        'datetime',
+        'date'
     ];
 
     // 关联检索选项类型检索配置项
